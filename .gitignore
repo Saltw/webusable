@@ -12,7 +12,9 @@ modules/*
 templates/*
 !templates/_common
 !templates/kickstart
+templates/kickstart/sass/sugar
 tmp/*
 !tmp/.htaccess
 uploads/*
 !uploads/.htaccess
+
