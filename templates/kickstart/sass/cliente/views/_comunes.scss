@@ -1,0 +1,121 @@
+@mixin ancho-yields {
+    @include hasta (#{$xs}) {
+        width: $wxs;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @include desde-hasta (#{$xs}, #{$xm}) {
+        width: $wxm;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @include desde-hasta (#{$xm}, #{$xxl}) {
+        width: $wxl;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @include desde (#{$xxl}) {
+        width: $wxxl;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@mixin padding-yields {
+    @include hasta (#{$xs}) {
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+    }
+    @include desde-hasta (#{$xs}, #{$xm}) {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    @include desde-hasta (#{$xm}, #{$xxl}) {
+        padding-left: 7.5%;
+        padding-right: 7.5%;
+    }
+    @include desde (#{$xxl}) {
+        padding-left: 12.5%;
+        padding-right: 12.5%;
+    }
+}
+
+@mixin radius ($px: 0.4em) {
+    border-top-right-radius: $px;
+    border-bottom-left-radius: $px;
+    border-bottom-right-radius: $px;
+}
+
+
+#barracookies {
+    @include barracookies;
+}
+
+.nombre-empresa {
+
+}
+
+//----------- @medias -----------//
+
+.legal,
+.bg,
+.index {
+    @include ancho-yields;
+}
+//----------- fin de @medias -----------//
+
+
+.contacto {
+    padding: $padding-comunes;
+}
+
+.index {
+    padding-bottom: $padding-comunes;
+}
+
+
+//----------- SVG -----------//
+.svg,
+.svg-mini,
+.svg-abbr,
+.svg-large {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0;
+}
+
+.svg {
+    svg {
+        height: $height-svg;
+        width: $height-svg * $svg-x/$svg-y;
+    }
+
+    &-mini {
+        svg {
+            height: $height-svg-mini;
+            width: $height-svg-mini * $svg-x/$svg-y;
+        }
+    }
+
+    &-large {
+        // svg {
+            height: $height-svg-large;
+            width: $height-svg-large *$svg-large-x/$svg-large-y;
+        // }
+    }
+}
+//----------- fin de SVG -----------//
+
+// Marca de agua
+.agua {
+    & > svg {
+        position: fixed;
+        bottom: 0;
+        right: -15%;
+        opacity: 0.2;
+        width: 75%;
+        height: 75%;
+        z-index: $z-index-tras-fixed;
+    }
+}

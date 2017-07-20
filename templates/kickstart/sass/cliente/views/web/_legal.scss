@@ -1,0 +1,54 @@
+.legal {
+    padding-bottom: $padding-comunes;
+
+    & > header {
+        width: 100%;
+        padding: $padding 0;
+        margin-bottom: $padding;
+        background-color: transparent;
+        // border-top definido en el main ../theme/tema
+        border-bottom: $border-default;
+        h2, h3 {
+            margin: auto;
+            line-height: $line-height-max;
+            text-align: center;
+        }
+        address {
+            padding-left: $padding;
+            padding-right: $padding;
+        }
+    }
+
+    p, li {
+        @include desde (#{$xs}) {
+            text-align: justify;
+        }
+    }
+
+    li {
+        margin-bottom: $top;
+
+        &:only-of-type,
+        &:last-child,
+        &:only-child {
+            margin-bottom: 0;
+        }
+        & a {
+            display: inline-block;
+        }
+    }
+
+    ul li,
+    p {
+        strong {
+            font-variant: small-caps;
+            border-bottom: $border-default;
+        }
+    }
+
+    a {
+        &:hover, &:focus, &:target {
+            color: $color--hover-oscuro;
+        }
+    }
+}

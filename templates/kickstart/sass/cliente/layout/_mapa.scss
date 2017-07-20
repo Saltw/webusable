@@ -1,0 +1,34 @@
+// figure.mapa
+.mapa {
+    position: relative;
+    width: 90%;
+    height: 50vh;
+    margin: 0 auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    // padding nunca: iría por dentro del leaflet
+    background: $bg-mapa;
+    border-radius: 5pt;
+    box-shadow: $box-shadow-p;
+
+    & noscript{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 5pt;
+        background: url('area-de-juego-mapa.jpg') center / cover;
+        & a {
+            display: block;
+            margin: 0 1em;
+            padding-top: $top;
+            text-align: center;
+            @include rwd-font-size (0.6rem, 0.9rem, 20rem, 80rem, 0.3rem);
+            color: #fff;
+            text-shadow: 0 1.5pt 2pt #000;
+        }
+    }
+}
+
+noscript.mapa {
+    // background: url('area-de-juego-linea-1.jpg') center / cover;
+}

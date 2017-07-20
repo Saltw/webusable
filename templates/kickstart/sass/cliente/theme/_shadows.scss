@@ -1,0 +1,142 @@
+//----------- Variables de COLORES -----------
+// ../_colores.scss
+// $bg-box--hover
+// $color-text-shadow-title
+
+//----------- BORDERS -----------
+
+@mixin border-diagonal (
+    $direccionX: right,
+    $direccionY: bottom,
+    $bg-fondo: rgba(#fff, 0.1),
+    $bg-frente: rgba(#000, 0.6),
+    $padding: 0,
+    $borde: 172pt,
+    $display: inline-block
+    // $line-height: $padding + $borde + 16pt
+){
+
+    padding: $padding;
+ //   	line-height: $line-height;
+
+   	border-#{$direccionX}: $borde solid $bg-fondo;
+   	border-#{$direccionY}: $borde solid $bg-frente;
+
+   	height: 0;
+   	display: $display;
+}
+
+
+//----------- BORDER -----------
+$border-default: 1px solid rgba($color-body, 0.2);
+$border-footer: 1px inset rgba(#fff, 0.6);
+
+
+//----------- TEXT-SHADOW properties -----------
+// x y [blur] [color] |none|initial|inherit;
+
+// Guardar todas. Comentar las q no se usen
+
+// text-shadow standard contrast
+// para fuentes mal-legibles sobre fondo claro
+$text-shadow-default: 1pt 1pt 1pt #000;
+
+// text-shadow suave del sitio (vs bg-body)
+// ../colores
+$text-shadow-header: 1pt 1pt 1pt $color-text-shadow-header;
+$text-shadow-title: 1pt 1pt 1pt $color-text-shadow-title;
+$text-shadow-subtitle: 1px 1pt 2pt #000;
+
+
+//----------- BOX-SHADOW properties -----------
+// x y [blur] [spread] [color] [inset] |none|initial|inherit;
+
+// Guardar todas. Comentar las q no se usen
+
+// lineal (0 0) blur fino
+$box-shadow-capa-av: 0 0 0.5rem $rgba-70;
+// lineal (0 0) blur grande
+$box-shadow-banner: 0 0 1.25rem $rgba-80;
+// inset blur medio
+$box-shadow-capa-total: 0 -0.625rem 0.625rem $rgba-70;
+// Párrafos-capa. x y blur grande
+$box-shadow-p: 0.0625em 0.0625em 0.125em $rgba-80;
+
+// box-shadow standard contrast vs fondo claro
+$box-shadow-default: 1pt 1pt 2pt rgba(#000, 0.8);
+$box-shadow-blur: 0 0 20pt rgba(#000, 0.8);
+$box-shadow-ns: 0 -10pt 10pt rgba(#000, 0.6),
+                0 10pt 10pt rgba(#000, 0.6);
+
+// box:hover suave del sitio vs bg-body
+$box-shadow--hover:
+    0 14pt 28pt rgba(#000, 0.25),
+    0 10pt 10pt rgba(#000, 0.22);
+
+$box-shadow-sumario:
+    0 -14pt 28pt rgba(#000, 0.25),
+    0 -10pt 10pt rgba(#000, 0.22);
+
+$box-shadow--black:
+    0 0 28pt rgba(#aaa, 0.25),
+    0 0 10pt rgba(#aaa, 0.22);
+
+
+// == $SPREAD-SOBRAO ==
+// Debe cubrir sobradam- a su parent
+// con overflow: hidden y/o backface-visibility: hidden
+// Comentar y adaptar a necesidades.
+$spread-sobrao: 900pt;
+
+// spread = Propagación [opcional]. El tamaño de la sombra
+$box-spread-sobrao: 0 0 0 $spread-sobrao;
+
+
+// box-shadow 0x 0y 0blur
+// que cubre al propio box con spread
+// y el color y la opacity recibidos
+// $bg-box--hover <= ../utils/_colores.scss
+
+@function dame-box-shadow-cover-spread(
+    $spread: $box-spread-sobrao,
+    $bg-color: $bg-box--hover,
+    $opacity: 0.2
+) {
+    @return $spread rgba($bg-color, $opacity);
+}
+
+@mixin box-shadow-cover (
+    $spread: $box-spread-sobrao,
+    // ../ utils/colores
+    $bg-color: $bg-box--hover,
+    $opacity: 0.2
+){
+    box-shadow: dame-box-shadow-cover-spread($spread, $bg-color, $opacity);
+}
+
+    //=============================================>>>>>
+    // = UTILES ANTIGUOS (vais a morir!!)=
+    // ===============================================>>>>>
+    //----------- text-shadow -----------
+    @mixin text-shadow($x: 1pt, $y: 1pt, $blur: 1pt, $color: #000) {
+        text-shadow: $x $y $blur $color;
+    }
+
+
+    @mixin sombra-texto ($blur, $color){
+        $pt: 25pt;
+        @if $blur == fino {
+            $pt: 9pt;
+        } @else if $blur == medio {
+            $pt: 25pt;
+        } @else if $blur == grande {
+            $pt: 50pt;
+        } @else {
+        }
+
+        $angulo: 0pt 2pt 2pt #000;
+        $resplandor: 0 0 $pt $color;
+        $contorno: 0 0 5pt #000;
+
+        text-shadow: $angulo, $resplandor, $contorno;
+    }

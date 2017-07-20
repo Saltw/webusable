@@ -1,0 +1,334 @@
+.index {
+    article {
+        p {
+            text-align: justify;
+        }
+    }
+
+    .sumario {
+
+        & p {
+            text-align: justify;
+        }
+
+        & article:nth-of-type(1) {
+            & h4 {
+                color: $color-b;
+            }
+            & a {
+                background: rgba($color-b, 0.9);
+            }
+        }
+
+        & article:nth-of-type(2) {
+            & h4 {
+                color: #000;
+            }
+            & a {
+                background: rgba(#000, 0.9);
+            }
+        }
+
+        & article:nth-of-type(3) {
+            & h4 {
+                color: $color-t2;
+            }
+            & a {
+                background: rgba($color-t2, 0.9);
+            }
+        }
+
+        & article:nth-of-type(4) {
+            & h4 {
+                color: $color-t1;
+            }
+            & a {
+                background: rgba($color-t1, 0.9);
+            }
+        }
+
+        &__linea {
+
+            & h4 {
+                margin: 0;
+                max-width: 100%;
+                font-size: 7em;
+                // text-shadow: 1px 1px 1px $bg-body,
+                //     -1px -1px 1px $bg-body;
+
+                & strong {
+                    -webkit-box-flex: 1;
+                        -ms-flex: 1 1 auto;
+                            flex: 1 1 auto;
+                }
+
+                &:first-letter {
+                    @include responsive-font-size (16rem, 20rem, 20rem, 100rem);
+                }
+            }
+
+            & > a,
+            & > figure,
+            & > figure:before {
+                border-radius: 5px;
+            }
+
+            & > a {
+                padding: $padding * 2;
+                text-align: center;
+                // background: $bg-box-b;
+                color: #fff;
+            }
+
+            @media screen and (max-width: 45rem) and (orientation: landscape) {
+                $sum:(
+                    xImg1: 0,
+                    xImg2: 67%,
+                    xTexto2: 79%,
+                    zTitulo: 0,
+                    xTitulo1: 22vw,
+                    yTitulo1: -13vw,
+                    sTitulo1: 0.5,
+                    xTitulo2: -26vw,
+                    yTitulo2: 24vw
+                );
+                @include sumario-index-hover($sum...);
+
+                & > h4 {
+                    line-height: 1;
+                    z-index: 3;
+                }
+                & > a {
+                    @include responsive-font-size (0.8rem, 1.5rem, 10rem, 100rem);
+                }
+            }
+
+            @media screen and (min-width: 45rem) and (max-width: 60rem) and (orientation: landscape) {
+                $sum:(
+                    xImg2: 67%,
+                    xTexto2: 70%,
+                    zTitulo: 0,
+                    xTitulo1: -25vw,
+                    yTitulo1: -10vw,
+                    sTitulo1: 0.5,
+                    xTitulo2: -25vw,
+                    yTitulo2: 24vw
+                );
+                @include sumario-index-hover($sum...);
+
+                & > h4 {
+                    line-height: 1;
+                }
+                & > a {
+                    @include responsive-font-size (0.8rem, 1.5rem, 10rem, 100rem);
+                }
+            }
+
+            @media screen and (min-width: 10rem) and (max-width: 37rem) and (orientation: portrait) {
+
+                position: relative;
+
+                & > h4 {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    font-size: 3em;
+                    z-index: 3;
+                }
+
+                & > figure {
+                    width: 100%;
+                    height: 32vh;
+                    margin: 0;
+                    margin-bottom: 6em;
+
+                    $map:(
+                        bg-color: $bg-body,
+                        opacity: 0.6
+                    );
+                    @include simple-before($map...);
+                }
+
+                & > a {
+                    width: 100%;
+                    @include responsive-font-size (1.1rem, 1.8rem, 10rem, 100rem);
+                    // @include responsive-font-size (0.9rem, 1.6rem, 10rem, 100rem);
+                }
+            }
+
+            @media screen and (min-width: 37rem) and (orientation: portrait) {
+                $sum:(
+                    xImg2: 0,
+                    xTexto2: 75%,
+                    zTitulo: 3,
+                    xTitulo2: -26vw,
+                    yTitulo2: 50vh);
+                @include sumario-index-hover($sum...);
+                & > a {
+                    @include responsive-font-size (1.1rem, 1.8rem, 10rem, 100rem);
+                    // @include responsive-font-size (0.9rem, 1.6rem, 10rem, 100rem);
+                }
+            }
+
+            @include desde-hasta (60rem, 65rem) {
+                @include sumario-index-hover;
+                & > a {
+                    @include responsive-font-size (1.1rem, 1.8rem, 10rem, 100rem);
+                }
+            }
+
+            @include desde-hasta (65rem, 87.5rem) {
+                $sum:( xImg2: 61% );
+                @include sumario-index-hover($sum...);
+                & > a {
+                    @include responsive-font-size (1.1rem, 1.8rem, 10rem, 100rem);
+                }
+            }
+
+            @include desde (87.5rem) {
+                $sum:(xTexto2: 59%);
+                @include sumario-index-hover($sum...);
+                & h4 {
+                    line-height: 2;
+                }
+                > a {
+                    @include responsive-font-size (1.1rem, 1.8rem, 10rem, 100rem);
+                }
+            }
+
+            @include desde-hasta (60rem, 80rem) {
+                & h4 {
+                    line-height: 0.9;
+                }
+            }
+
+            @include desde-hasta (80rem, 87.5rem) {
+                & h4 {
+                    line-height: 1.2;
+                }
+            }
+
+            @include desde-hasta (87.5rem, 90rem) {
+                & h4 {
+                    line-height: 1.5;
+                }
+            }
+
+            margin-top: $padding-item;
+        }
+    }
+}
+
+.bg {
+    $h: 24vw * 720/960;
+
+    & ul {
+        @include grid(li, 4);
+        border-top: $border-default;
+
+        & li {
+            & .active,
+            & a {
+                margin: 0;
+                height: $h;
+                $map:(bg-color: transparent);
+                @include simple-before ($map...);
+
+                & em,
+                & figcaption {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    padding: 0 1em;
+                    -webkit-transition: opacity $ss-item;
+                    transition: opacity $ss-item;
+                    opacity: 0;
+                    text-align: center;
+                    background: rgba($bg-body, 0.6);
+                    border-radius: 5px;
+                }
+            }
+
+            &:nth-of-type(1) {
+                & .active,
+                & a {
+                    & em,
+                    & figcaption {
+                        color: $color-b;
+                    }
+                    &:before {
+                        background: url('area-de-juego-linea-1.png');
+                        background-repeat: no-repeat;
+                        background-position: 50% 50%;
+                        background-size: 99%;
+                    }
+                }
+            }
+            &:nth-of-type(2) {
+                & .active,
+                & a {
+                    & em,
+                    & figcaption {
+                        color: #000;
+                    }
+                    &:before {
+                        background: url('area-de-juego-linea-4.png');
+                        background-repeat: no-repeat;
+                        background-position: 50% 50%;
+                        background-size: 99%;
+                    }
+                }
+            }
+            &:nth-of-type(3) {
+                & .active,
+                & a {
+                    & em,
+                    & figcaption {
+                        color: $color-t2;
+                    }
+                    &:before {
+                        background: url('area-de-juego-linea-2.png');
+                        background-repeat: no-repeat;
+                        background-position: 50% 50%;
+                        background-size: 99%;
+                    }
+                }
+            }
+            &:nth-of-type(4) {
+                & .active,
+                & a {
+                    & em,
+                    & figcaption {
+                        color: $color-t1;
+                    }
+                    &:before {
+                        background: url('area-de-juego-linea-3.png');
+                        background-repeat: no-repeat;
+                        background-position: 50% 50%;
+                        background-size: 99%;
+                    }
+                }
+            }
+
+            & .active {
+                &:before {
+                    opacity: 0.4;
+                }
+            }
+
+            &:hover, &:target, &:focus {
+                & em,
+                & figcaption {
+                    opacity: 1;
+                }
+                & a {
+                    &:before {
+                        opacity: 0.4;
+                    }
+                }
+            }
+        }
+    }
+}

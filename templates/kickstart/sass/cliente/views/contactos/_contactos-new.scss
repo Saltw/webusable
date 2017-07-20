@@ -1,0 +1,72 @@
+// article.contacto
+.contacto {
+    margin-top: $top;
+    overflow: hidden;
+
+    $img-map:(
+        url: "area-de-juego-contacto.jpg",
+        height: inherit,
+        bg-color: $rgba-70,
+        filter: blur(2px));
+    $formu: (
+        bg-legend: rgba($color-b, 0.6),
+        bg-fieldset: rgba($color-b, 0.6),
+        bg-submit: rgba($color-t2, 0.8),
+        color-legend: $color-footer--hover,
+        terciario: $color-footer,
+        color: $color-t2,
+        color-info: $color-footer--hover
+    );
+
+    @include simple-bg ($img-map...);
+    @include simple-form-ie ($formu...);
+
+    // contacto__form
+    &__form {
+        @include estilo-details-ie;
+
+        @include hasta (#{$xs}) {
+            width: $max-width;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @include desde (#{$xs}) {
+            @include rwd-width;
+        }
+        // padding-bottom: 5vmin;
+
+        h2.legend {
+            & a {
+                font-family: $font-family-body;
+                display: block;
+            }
+        }
+
+        input + a {
+            display: inline-block;
+        }
+    }
+
+    & footer {
+        position: relative;
+        margin-top: $padding-item;
+        // padding-bottom: $padding * 2;
+        background: rgba($color-t2, 0.6);
+        border-radius: 5pt;
+                // @include ancho-yields;
+
+        & > p,
+        & address {
+            line-height: 3;
+            color: $color-t1;
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        & .footer__mapa {
+            & figure {
+                margin: 0 auto;
+            }
+        }
+    }
+}

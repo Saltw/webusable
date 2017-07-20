@@ -1,0 +1,56 @@
+
+.header {
+
+    @include hasta (25rem){
+        & > ul {
+            // width: 100%;
+            display: none;
+        }
+    }
+
+    @include desde (25rem) {
+        & > a {
+            padding-bottom: $padding;
+        }
+        & > ul {
+            width: 40%;
+            margin: 0;
+
+            & li {
+                width: 100%;
+                margin-right: $padding;
+            }
+        }
+    }
+
+    & > ul {
+        li {
+            white-space: nowrap;
+            & a:before {
+                top: 0;
+            }
+        }
+    }
+
+    & > nav {
+        width: $max-width;
+        @include desde (#{$xs}) {
+            padding: $padding-menu/2 0;
+        }
+    }
+
+    // include nav {@content}
+    $map:(
+        size: #{$xs},
+        flex: 'main-center',
+        padding-button: $padding,
+        bg-menu: $color-b,
+        color: $color-t1,
+        bg-button--active: $color-t2,
+        color--active: $bg-body,
+        border-bottom: none
+    );
+    @include menu-simple($map...);
+    -webkit-transition: all 2s;
+            transition: all 2s;
+}
