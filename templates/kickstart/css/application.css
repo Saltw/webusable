@@ -16286,7 +16286,11 @@ a {
     position: absolute;
     bottom: -0.8em; }
 
-/* line 39, sass/sugar/components/_fondos.scss */
+/* line 1, sass/sugar/components/_fondos.scss */
+.cebolla {
+  background: lime; }
+
+/* line 42, sass/sugar/components/_fondos.scss */
 .cuaderno {
   position: relative;
   background: #f9f9f9;
@@ -16294,14 +16298,14 @@ a {
   background: linear-gradient(#f9f9f9 98%, #006699 98%);
   background-size: 100% 1.875em;
   background-position: 0 1em; }
-  /* line 59, sass/sugar/components/_fondos.scss */
+  /* line 62, sass/sugar/components/_fondos.scss */
   .cuaderno .cuaderno header {
     color: #006699;
     line-height: 3.75em; }
-  /* line 66, sass/sugar/components/_fondos.scss */
+  /* line 69, sass/sugar/components/_fondos.scss */
   .cuaderno ul li {
     position: relative; }
-    /* line 68, sass/sugar/components/_fondos.scss */
+    /* line 71, sass/sugar/components/_fondos.scss */
     .cuaderno ul li:before {
       content: "\2713";
       color: green;

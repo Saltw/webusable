@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2017-07-10 08:16:54
+<?php /* Smarty version Smarty-3.1.19, created on 2017-07-24 13:47:17
          compiled from "/var/www/html/webusable/public_html/templates/kickstart/layout.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:606162116596370363c5b74-70782174%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b6a98766b729575e201c2df80f003ee8a1eeea68' => 
     array (
       0 => '/var/www/html/webusable/public_html/templates/kickstart/layout.tpl',
-      1 => 1499642987,
+      1 => 1500896768,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.19',
+  'unifunc' => 'content_596370365f5b57_79895956',
   'variables' => 
   array (
     'core' => 0,
@@ -30,8 +32,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'previewMode' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.19',
-  'unifunc' => 'content_596370365f5b57_79895956',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_596370365f5b57_79895956')) {function content_596370365f5b57_79895956($_smarty_tpl) {?><?php if (!is_callable('smarty_function_ia_hooker')) include '/var/www/html/webusable/public_html/includes/smarty/intelli_plugins/function.ia_hooker.php';
 if (!is_callable('smarty_modifier_date_format')) include '/var/www/html/webusable/public_html/includes/smarty/plugins/modifier.date_format.php';
@@ -209,7 +209,7 @@ search/" class="search-inventory pull-right">
             </div>
         </div>
 
-        <nav class="navbar navbar-default <?php if ($_smarty_tpl->tpl_vars['core']->value['config']['navbar_sticky']) {?>navbar-sticky<?php }?>">
+        <nav class="cebolla navbar navbar-default <?php if ($_smarty_tpl->tpl_vars['core']->value['config']['navbar_sticky']) {?>navbar-sticky<?php }?>">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
@@ -511,4 +511,5 @@ cron/?<?php echo smarty_function_randnum(array(),$_smarty_tpl);?>
         <?php echo smarty_function_ia_hooker(array('name'=>'smartyFrontFinalize'),$_smarty_tpl);?>
 
     </body>
-</html><?php }} ?>
+</html>
+<?php }} ?>

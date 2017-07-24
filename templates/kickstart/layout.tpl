@@ -113,7 +113,7 @@
             </div>
         </div>
 
-        <nav class="navbar navbar-default {if $core.config.navbar_sticky}navbar-sticky{/if}">
+        <nav class="cebolla navbar navbar-default {if $core.config.navbar_sticky}navbar-sticky{/if}">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
