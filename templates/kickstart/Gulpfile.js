@@ -84,10 +84,10 @@ gulp.task("less", function() {
         browsers: ['last 2 versions'],
         cascade: false
     }))
-    // .pipe(cleanCSS({
-    //   advanced: false,
-    //   processImport: false
-    // }))
+    .pipe(cleanCSS({
+      advanced: false,
+      processImport: false
+    }))
     .pipe(gulp.dest(config.paths.less.dest));
 });
 
