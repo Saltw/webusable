@@ -237,12 +237,20 @@ $bg-color-box-t2--hover: #fff;
 
 
 //----------- LAYOUT -----------//
-// footer
+
+// -- footer
 $bg-footer-back: colorea($color-t1, d3);
 $bg-footer-end: rgba(colorea($color-b, d1), 0.6);
-$color-footer: #fff;
+$color-footer: rgba(#fff, .45);
 $color-footer--hover: $color-t1;
 $color-footer--active: $color-b;
+
+
+// -- Menus
+$bg-inventory: $bg-footer-back;
+$color-inventory: $color-footer;
+$color-inventory--hover: $color-footer--hover;
+$color-inventory--active: $color-footer--active;
 
 // mapa
 $bg-mapa: rgba($color-b, 0.8);

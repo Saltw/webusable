@@ -1,9 +1,98 @@
+.lima {
+    background: lime;
+}
+.tomate  {
+    background: tomato;
+}
+.marelo {
+    background: amarillo;
+}
+.lila {
+    background: violet;
+}
+
+.inventory {
+    /* Tiene preferencia la Configuración por Panel de Administración*/
+    /* Sólo cuando Habilitar colores y fondos personalizados DESHabilitado*/
+    /* dominio/panel/configuration/template_kickstart/*/
+    /* dominio -> panel -> EXtensiones -> Plantillas -> Ajustes*/
+
+    width: 100%;
+    height: $height-inventory-item;
+
+    background: $bg-inventory;
+
+    &__social,
+    &__bread,
+    &__lang,
+    &__search {
+        margin: 0;
+        padding: 0 $padding;
+
+        & > li {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            -ms-flex-line-pack: cente;
+                align-content: cente;
+            height: $height-inventory-item;
+            padding-right: $padding/2;
+
+            &:last-child,
+            &:only-child {
+                padding-right: 0;
+            }
+
+            & > a {
+                color: $color-inventory;
+            }
+        }
+    }
+
+    &__bread,
+    &__lang {
+        li {
+            & > a {
+                &:hover, &:focus, &:target {
+                    color: $color-inventory--hover;
+                }
+            }
+            &.active {
+                & > a {
+                    color: $color-inventory--active;
+
+                }
+            }
+        }
+    }
+
+    &__bread {
+        & > li + li:before {
+            // content: "\003e\00a0";
+            content: ">\00a0";
+            color: $color-inventory;
+        }
+    }
+
+    &__social {
+        @include hasta (#{$xs}) {
+        display: none;
+    }
+
+    &__search {}
+    }
+}
 
 .header {
 
     @include hasta (25rem){
         & > ul {
-            // width: 100%;
+            /* width: 100%;*/
             display: none;
         }
     }
@@ -39,7 +128,7 @@
         }
     }
 
-    // include nav {@content}
+    /* include nav {@content}*/
     $map:(
         size: #{$xs},
         flex: 'main-center',

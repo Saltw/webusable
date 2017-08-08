@@ -189,7 +189,7 @@
                 <div class="col col-lg-2">
                     {if count($core.languages) > 1}
                         <div class="btn-group btn-group-xs translate-group-actions">
-                            <button type="button" class="btn btn-default js-edit-lang-group" data-group="#language-group-title"><span class="i-earth"></span></button>
+                            <button type="button" class="btn btn-default js-edit-lang-group" data-group="#language-group-title" title="Editar en otros idiomas"><span class="i-earth"></span></button>
                             <button type="button" class="btn btn-default js-copy-lang-group" data-group="#language-group-title"><span class="i-copy"></span></button>
                         </div>
                     {/if}

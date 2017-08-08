@@ -17374,7 +17374,7 @@ dl-buttons-dos {
     .contacto h2.legend a:hover,
     .contacto h2.legend a:focus,
     .contacto h2.legend a:target {
-      color: #fff; }
+      color: rgba(255, 255, 255, 0.45); }
   /* line 107, sass/sugar/components/_formularios.scss */
   .contacto a:hover, .contacto a:target, .contacto a:focus {
     color: #ffcc00; }
@@ -18904,36 +18904,100 @@ dl-buttons-dos {
     .contacto footer .footer__mapa figure {
       margin: 0 auto; }
 
-/* line 2, sass/cliente/layout/_header.scss */
+/* line 1, sass/cliente/layout/_header.scss */
+.lima {
+  background: lime; }
+
+/* line 4, sass/cliente/layout/_header.scss */
+.tomate {
+  background: tomato; }
+
+/* line 7, sass/cliente/layout/_header.scss */
+.marelo {
+  background: amarillo; }
+
+/* line 10, sass/cliente/layout/_header.scss */
+.lila {
+  background: violet; }
+
+/* line 14, sass/cliente/layout/_header.scss */
+.inventory {
+  /* Tiene preferencia la Configuración por Panel de Administración*/
+  /* Sólo cuando Habilitar colores y fondos personalizados DESHabilitado*/
+  /* dominio/panel/configuration/template_kickstart/*/
+  /* dominio -> panel -> EXtensiones -> Plantillas -> Ajustes*/
+  width: 100%;
+  height: 50px;
+  background: #665200; }
+  /* line 25, sass/cliente/layout/_header.scss */
+  .inventory__social, .inventory__bread, .inventory__lang, .inventory__search {
+    margin: 0;
+    padding: 0 1em; }
+    /* line 32, sass/cliente/layout/_header.scss */
+    .inventory__social > li, .inventory__bread > li, .inventory__lang > li, .inventory__search > li {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -ms-flex-align: center;
+      align-items: center;
+      -ms-flex-line-pack: cente;
+      align-content: cente;
+      height: 50px;
+      padding-right: 0.5em; }
+      /* line 46, sass/cliente/layout/_header.scss */
+      .inventory__social > li:last-child, .inventory__social > li:only-child, .inventory__bread > li:last-child, .inventory__bread > li:only-child, .inventory__lang > li:last-child, .inventory__lang > li:only-child, .inventory__search > li:last-child, .inventory__search > li:only-child {
+        padding-right: 0; }
+      /* line 51, sass/cliente/layout/_header.scss */
+      .inventory__social > li > a, .inventory__bread > li > a, .inventory__lang > li > a, .inventory__search > li > a {
+        color: rgba(255, 255, 255, 0.45); }
+  /* line 61, sass/cliente/layout/_header.scss */
+  .inventory__bread li > a:hover, .inventory__bread li > a:focus, .inventory__bread li > a:target, .inventory__lang li > a:hover, .inventory__lang li > a:focus, .inventory__lang li > a:target {
+    color: #ffcc00; }
+  /* line 66, sass/cliente/layout/_header.scss */
+  .inventory__bread li.active > a, .inventory__lang li.active > a {
+    color: #006699; }
+  /* line 75, sass/cliente/layout/_header.scss */
+  .inventory__bread > li + li:before {
+    content: ">\00a0";
+    color: rgba(255, 255, 255, 0.45); }
+  @media screen and (max-width: 30rem) {
+    /* line 82, sass/cliente/layout/_header.scss */
+    .inventory__social {
+      display: none; } }
+
+/* line 91, sass/cliente/layout/_header.scss */
 .header {
+  /* include nav {@content}*/
   transition: all 2s; }
   @media screen and (max-width: 25rem) {
-    /* line 5, sass/cliente/layout/_header.scss */
+    /* line 94, sass/cliente/layout/_header.scss */
     .header > ul {
+      /* width: 100%;*/
       display: none; } }
   @media screen and (min-width: 25rem) {
-    /* line 12, sass/cliente/layout/_header.scss */
+    /* line 101, sass/cliente/layout/_header.scss */
     .header > a {
       padding-bottom: 1em; }
-    /* line 15, sass/cliente/layout/_header.scss */
+    /* line 104, sass/cliente/layout/_header.scss */
     .header > ul {
       width: 40%;
       margin: 0; }
-      /* line 19, sass/cliente/layout/_header.scss */
+      /* line 108, sass/cliente/layout/_header.scss */
       .header > ul li {
         width: 100%;
         margin-right: 1em; } }
-  /* line 27, sass/cliente/layout/_header.scss */
+  /* line 116, sass/cliente/layout/_header.scss */
   .header > ul li {
     white-space: nowrap; }
-    /* line 29, sass/cliente/layout/_header.scss */
+    /* line 118, sass/cliente/layout/_header.scss */
     .header > ul li a:before {
       top: 0; }
-  /* line 35, sass/cliente/layout/_header.scss */
+  /* line 124, sass/cliente/layout/_header.scss */
   .header > nav {
     width: 100%; }
     @media screen and (min-width: 30rem) {
-      /* line 35, sass/cliente/layout/_header.scss */
+      /* line 124, sass/cliente/layout/_header.scss */
       .header > nav {
         padding: 0.3em 0; } }
   /* line 55, sass/sugar/components/_menus.scss */
@@ -19033,7 +19097,7 @@ dl-buttons-dos {
 .footer {
   margin: auto;
   background: rgba(0, 68, 102, 0.6);
-  color: #fff; }
+  color: rgba(255, 255, 255, 0.45); }
   @media screen and (max-width: 30rem) {
     /* line 1, sass/cliente/layout/_footer.scss */
     .footer {
@@ -19067,7 +19131,7 @@ dl-buttons-dos {
   /* line 27, sass/cliente/layout/_footer.scss */
   .footer .contentinfo h2 {
     width: 100%;
-    color: #fff; }
+    color: rgba(255, 255, 255, 0.45); }
     /* line 31, sass/cliente/layout/_footer.scss */
     .footer .contentinfo h2, .footer .contentinfo h2 a {
       font-size: 1.6em; }
@@ -19086,28 +19150,28 @@ dl-buttons-dos {
       padding: 0.4em;
       margin: 0.3em;
       border-radius: 50%;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.45);
       color: #006699; }
       /* line 38, sass/sugar/components/_iconos.scss */
       .footer .contentinfo address ul.redes li a.icon-facebook:hover, .footer .contentinfo address ul.redes li a.icon-facebook:focus, .footer .contentinfo address ul.redes li a.icon-facebook:target {
         background: #3b5998;
-        color: #fff; }
+        color: rgba(255, 255, 255, 0.45); }
       /* line 44, sass/sugar/components/_iconos.scss */
       .footer .contentinfo address ul.redes li a.icon-twitter:hover, .footer .contentinfo address ul.redes li a.icon-twitter:focus, .footer .contentinfo address ul.redes li a.icon-twitter:target {
         background: #00aced;
-        color: #fff; }
+        color: rgba(255, 255, 255, 0.45); }
       /* line 50, sass/sugar/components/_iconos.scss */
       .footer .contentinfo address ul.redes li a.icon-googleplus:hover, .footer .contentinfo address ul.redes li a.icon-googleplus:focus, .footer .contentinfo address ul.redes li a.icon-googleplus:target {
         background: #dd4b39;
-        color: #fff; }
+        color: rgba(255, 255, 255, 0.45); }
       /* line 56, sass/sugar/components/_iconos.scss */
       .footer .contentinfo address ul.redes li a.icon-linkedin:hover, .footer .contentinfo address ul.redes li a.icon-linkedin:focus, .footer .contentinfo address ul.redes li a.icon-linkedin:target {
         background: #0077b5;
-        color: #fff; }
+        color: rgba(255, 255, 255, 0.45); }
       /* line 62, sass/sugar/components/_iconos.scss */
       .footer .contentinfo address ul.redes li a.icon-youtube:hover, .footer .contentinfo address ul.redes li a.icon-youtube:focus, .footer .contentinfo address ul.redes li a.icon-youtube:target {
         background: #b00;
-        color: #fff; }
+        color: rgba(255, 255, 255, 0.45); }
   /* line 67, sass/cliente/layout/_footer.scss */
   .footer .contentinfo__sitemap ul > li:nth-of-type(1) a strong {
     color: #006699; }
@@ -19146,7 +19210,7 @@ dl-buttons-dos {
     color: #ffcc00; }
     /* line 136, sass/cliente/layout/_footer.scss */
     .footer .contentinfo__sitemap ul > li:nth-of-type(4) > ul li a:hover, .footer .contentinfo__sitemap ul > li:nth-of-type(4) > ul li a:focus, .footer .contentinfo__sitemap ul > li:nth-of-type(4) > ul li a:target {
-      color: #fff; }
+      color: rgba(255, 255, 255, 0.45); }
   /* line 142, sass/cliente/layout/_footer.scss */
   .footer .contentinfo__sitemap ul > li > ul {
     border-top: 1px inset rgba(255, 255, 255, 0.6); }

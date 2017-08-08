@@ -75,10 +75,14 @@ gulp.task("less-dev", function(){
 });
 
 gulp.task("less", function() {
-  return gulp.src(config.paths.less.src.prod)
+    return gulp.src(config.paths.less.src.prod)
+    // .pipe(less({sourceComments: true}).on('error', function(err) {
+    //     gutil.log(err);
+    //     this.emit('end');
+    // }))
     .pipe(less().on('error', function(err) {
-      gutil.log(err);
-      this.emit('end');
+        gutil.log(err);
+        this.emit('end');
     }))
     .pipe(autoprefixer({
         browsers: ['last 2 versions'],

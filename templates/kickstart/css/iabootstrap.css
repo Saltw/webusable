@@ -9974,6 +9974,18 @@ body {
 .inventory {
   background: #323232;
 }
+.inventory .nav-inventory > li > a,
+.inventory .nav-inventory > li > a:focus {
+  color: rgba(255, 255, 255, 0.45);
+}
+.inventory .nav-inventory > li > a:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+.inventory .nav-inventory > li.active > a,
+.inventory .nav-inventory > li.active > a:focus,
+.inventory .nav-inventory > li.active > a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
 .search-inventory {
   margin: 0 20px 0 0;
   position: relative;
@@ -10036,18 +10048,11 @@ body {
 .nav-inventory > li > a:focus {
   display: block;
   line-height: 50px;
-  color: rgba(255, 255, 255, 0.45);
   font-size: 12px;
   text-decoration: none;
 }
 .nav-inventory > li > a:hover {
-  color: rgba(255, 255, 255, 0.5);
   text-decoration: underline;
-}
-.nav-inventory > li.active > a,
-.nav-inventory > li.active > a:focus,
-.nav-inventory > li.active > a:hover {
-  color: rgba(255, 255, 255, 0.7);
 }
 .nav-inventory.pull-right {
   margin: 0 0 0 20px;

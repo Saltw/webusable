@@ -38,18 +38,120 @@
             {/foreach}
         {/ia_add_js}
 
-        {include '_componentes/datos-estructurados.tpl'}
-        {include '_layout/custom-colors.tpl'}
+        {if $core.config.custom_colors}
+            <style type="text/css">
+                body { background-color: {$core.config.custom_color_body_bg}; color: {$core.config.custom_color_text}; }
+                h1, h2, h3, h4, h5, h6,
+                .box__caption { color: {$core.config.custom_color_headings}; }
+                a,
+                a:focus { color: {$core.config.custom_color_link}; }
+                a:hover { color: {$core.config.custom_color_link_hover}; }
+
+                .inventory { background-color: {$core.config.custom_color_inventory_bg}; }
+                .nav-inventory > li > a,
+                .nav-inventory > li > a:focus { color: {$core.config.custom_color_inventory_link}; }
+                .nav-inventory > li > a:hover { color: {$core.config.custom_color_inventory_link_hover}; }
+                .nav-inventory > li.active > a,
+                .nav-inventory > li.active > a:focus,
+                .nav-inventory > li.active > a:hover { color: {$core.config.custom_color_inventory_link_active}; }
+
+                .navbar-default { background-color: {$core.config.custom_color_navbar_bg}; }
+                .navbar-default .navbar-nav > li > a,
+                .navbar-default .navbar-nav > li > a:focus { color: {$core.config.custom_color_navbar_link}; }
+                .navbar-default .navbar-nav > li > a:hover { color: {$core.config.custom_color_navbar_link_hover}; }
+                .navbar-default .navbar-nav > li.active > a,
+                .navbar-default .navbar-nav > li.active > a:focus,
+                .navbar-default .navbar-nav > li.active > a:hover { color: {$core.config.custom_color_navbar_link_active}; }
+
+                .header {
+                    {if $core.config.bg_header_use_color}
+                        background: {$core.config.bg_header_color};
+                    {elseif $core.config.bg_header}
+                        background-image: url('{$core.page.nonProtocolUrl}uploads/{$core.config.bg_header}');
+                    {/if}
+                }
+
+                .section-features {
+                    {if $core.config.bg_features_use_color}
+                        background: {$core.config.bg_features_color};
+                    {elseif $core.config.bg_features}
+                        background-image: url('{$core.page.nonProtocolUrl}uploads/{$core.config.bg_features}');
+                    {/if}
+                }
+
+                .footer-blocks { background: {$core.config.footer_blocks_bg}; }
+                .footer { background: {$core.config.footer_bg}; }
+                .nav-footer > li > a,
+                .nav-footer > li > a:focus { color: {$core.config.footer_link}; }
+                .nav-footer > li > a:hover { color: {$core.config.footer_link_hover}; }
+                .nav-footer > li.active > a,
+                .nav-footer > li.active > a:focus,
+                .nav-footer > li.active > a:hover { color: {$core.config.footer_link_active}; }
+            </style>
+        {/if}
     </head>
 
     <body class="page-{$core.page.name}">
+        <div class="inventory">
+            <div class="container">
+                {if $core.config.website_social}
+                    <ul class="nav-inventory nav-inventory-social pull-left hidden-xs">
+                        {if $core.config.website_social_t}<li><a href="{$core.config.website_social_t}" class="twitter"><span class="fa fa-twitter"></span></a></li>{/if}
+                        {if $core.config.website_social_f}<li><a href="{$core.config.website_social_f}" class="facebook"><span class="fa fa-facebook"></span></a></li>{/if}
+                        {if $core.config.website_social_g}<li><a href="{$core.config.website_social_g}" class="google-plus"><span class="fa fa-google-plus"></span></a></li>{/if}
+                        {if $core.config.website_social_i}<li><a href="{$core.config.website_social_i}" class="linkedin"><span class="fa fa-linkedin"></span></a></li>{/if}
+                    </ul>
+                {/if}
+                {if $core.config.search_inventory}
+                    <form method="get" action="{$smarty.const.IA_URL}search/" class="search-inventory pull-right">
+                        <input type="text" name="q" placeholder="{lang key='search'}">
+                        <button type="submit"><span class="fa fa-search"></span></button>
+                    </form>
+                {/if}
+                {include 'language-selector.tpl'}
+                {ia_blocks block='inventory'}
+            </div>
+        </div>
 
-        <header>
-            {include '_layout/menu-inventory.tpl'}
-            {include '_layout/menu-principal.tpl'}
-            {include '_views/_layout/main.tpl'}
-        </header>
+        <nav class="navbar navbar-default {if $core.config.navbar_sticky}navbar-sticky{/if}">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand{if !$core.config.enable_text_logo} navbar-brand--img{/if}" href="{$smarty.const.IA_URL}">
+                        {if $core.config.enable_text_logo}
+                            {$core.config.logo_text}
+                        {else}
+                            {if !empty($core.config.site_logo)}
+                                <img src="{$core.page.nonProtocolUrl}uploads/{$core.config.site_logo}" alt="{$core.config.site}">
+                            {else}
+                                <img src="{$img}logo.png" alt="{$core.config.site}">
+                            {/if}
+                        {/if}
+                    </a>
+                </div>
 
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                    {if $core.config.search_navbar}
+                        <form method="get" action="{$smarty.const.IA_URL}search/" class="search-navbar pull-right">
+                            <button class="search-navbar__toggle js-search-navbar-toggle" type="button"><span class="fa fa-search"></span></button>
+                            <div class="input-group">
+                                <input type="text" name="q" class="form-control" placeholder="{lang key='search'}">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">{lang key='search'}</button>
+                                </div>
+                            </div>
+                        </form>
+                    {/if}
+                    {ia_blocks block='account'}
+                    {ia_blocks block='mainmenu'}
+                </div>
+            </div>
+        </nav>
 
         {if isset($smarty.get.elements)}
             {include 'page.elements.tpl'}
@@ -115,9 +217,8 @@
 
                                     {ia_blocks block='top'}
 
-                                    <div class="content__header tomate">
+                                    <div class="content__header">
                                         <h1>{$core.page.title|escape}</h1>
-                                        <h2>{$core.page.name|capitalize}</h2>
                                         <ul class="content__actions">
                                             {foreach $core.actions as $name => $action}
                                                 <li>
