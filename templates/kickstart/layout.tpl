@@ -38,7 +38,7 @@
             {/foreach}
         {/ia_add_js}
 
-        {include '_componentes/datos-estructurados.tpl'}
+        {include '_seo/structured-data.tpl'}
         {include '_layout/custom-colors.tpl'}
     </head>
 
@@ -180,12 +180,10 @@
             <div class="container">
                 {ia_hooker name='smartyFrontBeforeFooterLinks'}
 
+                {* Panel - Extensiones - Plantillas - Ajustes - Social links *}
                 {if $core.config.website_social}
                     <ul class="nav-footer nav-footer-social">
-                        {if $core.config.website_social_t}<li><a href="{$core.config.website_social_t}" class="twitter"><span class="fa fa-twitter"></span></a></li>{/if}
-                        {if $core.config.website_social_f}<li><a href="{$core.config.website_social_f}" class="facebook"><span class="fa fa-facebook"></span></a></li>{/if}
-                        {if $core.config.website_social_g}<li><a href="{$core.config.website_social_g}" class="google-plus"><span class="fa fa-google-plus"></span></a></li>{/if}
-                        {if $core.config.website_social_i}<li><a href="{$core.config.website_social_i}" class="linkedin"><span class="fa fa-linkedin"></span></a></li>{/if}
+                        {include '_layout/menu-social.tpl'}
                     </ul>
                 {/if}
 
