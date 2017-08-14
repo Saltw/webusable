@@ -49,6 +49,9 @@
                             {if isset($tooltips[$entry.name])}
                                 <a href="#" class="js-tooltip" title="{$tooltips[$entry.name]}"><i class="i-info"></i></a>
                             {/if}
+                            {if $entry.required == '1'}
+                                <span class="required">*</span>
+                            {/if}
                         </label>
                     </div>
 
@@ -67,7 +70,7 @@
                         <div class="item-input">
                             <input type="password" class="js-input-password" name="v[{$entry.name}]" id="{$entry.name}" value="{$entry.value|escape}" autocomplete="new-password" />
                         </div>
-                    {elseif 'text' == $entry.type}
+                    {elseif ('text' == $entry.type) or ('number' == $entry.type)}
                         {if 'captcha_preview' == $entry.name}
                             {captcha preview=true}
                         {else}
@@ -80,7 +83,7 @@
                             <div class="translate-group item-input" id="language-group-{$entry.name}">
                                 <div class="translate-group__default">
                                     <div class="translate-group__item">
-                                        <input type="text" name="v[{$entry.name}]{if $isMultilingual}[{$core.language.iso}]{/if}" id="{$entry.name}-{$core.language.iso}" value="{{($isMultilingual) ? $entry.value[$core.language.iso] : $entry.value}|escape}" />
+                                        <input type="{$entry.type}" name="v[{$entry.name}]{if $isMultilingual}[{$core.language.iso}]{/if}" id="{$entry.name}-{$core.language.iso}" value="{{($isMultilingual) ? $entry.value[$core.language.iso] : $entry.value}|escape}" {if isset ($tooltips[$entry.name|cat:"_title"])} title='{$tooltips[$entry.name|cat:"_title"]}' {/if} {if ($entry.pattern != "")} pattern="{$entry.pattern}" {/if}  {if $entry.maxlength != 0} maxlength="{$entry.maxlength}" {/if} {if ($entry.placeholder != "")} placeholder="{$entry.placeholder}" {/if} {if ($entry.required == "1")} required {/if}/>
                                         {if $isMultilingual && count($core.languages) > 1}
                                             <div class="translate-group__item__code">
                                                 {$core.language.title|escape}
