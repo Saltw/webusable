@@ -2,17 +2,37 @@
 {
     "@context": "http://schema.org",
     "@type": "Organization",
-    "url": "{$smarty.const.IA_CANONICAL}",
+    "@id": "{$core.config.baseurl}#organization",
+    "name": "{$core.config.site}",
     "url": "{$core.config.baseurl}",
-    "sameAs": ["https://twitter.com/@Moz","https://www.facebook.com/moz","https://www.linkedin.com/company/moz"],
+    "logo": {
+        "@type": "ImageObject",
+        // "width": 960,
+        // "height": 720,
+        "url": "{$core.config.baseurl}uploads/{$core.config.site_logo}"
+    },
+    "sameAs": [
+        "{$core.config.website_social_t}",
+        "{$core.config.website_social_f}",
+        "{$core.config.website_social_g}",
+        "{$core.config.website_social_i}",
+        "{$core.config.website_social_h}",
+        "{$core.config.website_social_y}"],
     "location": {
         "@type": "Place",
         "name": "{$core.config.site}",
         "url": "{$smarty.const.IA_URL}",
-        "sameAs": ["https://twitter.com/@Moz","https://www.facebook.com/moz","https://www.linkedin.com/company/moz"]
+        "sameAs": [
+            "{$core.config.website_social_t}",
+            "{$core.config.website_social_f}",
+            "{$core.config.website_social_g}",
+            "{$core.config.website_social_i}",
+            "{$core.config.website_social_h}",
+            "{$core.config.website_social_y}"]
     }
 }
 </script>
+
 <script type="application/ld+json">
 {
     "@context": "http://schema.org",
