@@ -10,14 +10,15 @@
         // "width": 960,
         // "height": 720,
         "url": "{$core.config.baseurl}uploads/{$core.config.site_logo}"
-    },
+    }{if $core.config.website_social == 1},
     "sameAs": [
         "{$core.config.website_social_t}",
         "{$core.config.website_social_f}",
         "{$core.config.website_social_g}",
         "{$core.config.website_social_i}",
         "{$core.config.website_social_h}",
-        "{$core.config.website_social_y}"],
+        "{$core.config.website_social_y}"]
+{/if}{if $core.config.location_check == 1},
     "location": {
         "@type": "Place",
         "name": "{$core.config.site}",
@@ -30,6 +31,7 @@
             "{$core.config.website_social_h}",
             "{$core.config.website_social_y}"]
     }
+{/if}
 }
 </script>
 
