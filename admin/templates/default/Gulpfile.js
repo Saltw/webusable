@@ -1,5 +1,5 @@
 //
-// Please don't forget to do `gulp build` before 
+// Please don't forget to do `gulp build` before
 // pushing to repo
 // --------------------------------------------------
 
@@ -53,9 +53,9 @@ gulp.task("less", function(){
             gutil.log(err);
             this.emit('end');
         }))
-        .pipe(cleanCSS({
-            advanced: false
-        }))
+        // .pipe(cleanCSS({
+        //     advanced: false
+        // }))
         .pipe(rename(function (path) {
             path.basename = path.basename.replace('base', 'bootstrap');
         }))

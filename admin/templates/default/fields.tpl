@@ -42,7 +42,7 @@
                 <div class="row">
                     <label class="col col-lg-2 control-label">{lang key='field_item'} <span class="required">*</span></label>
 
-                    <div class="col col-lg-4">
+                    <div class="col col-lg-4 tomate">
                         <select name="item" id="input-item">
                             <option value="">{lang key='_select_'}</option>
                             {foreach $items as $entry}
