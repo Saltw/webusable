@@ -8,7 +8,7 @@
                 {assign field_show explode('|', $entry.options.show)}
 
                 {capture assign='dependent_fields'}
-                    data-id="js-{$field_show[0]}-{$field_show[1]}" {if (!empty($field_show[0]) && $core.config.{$field_show[0]} != $field_show[1])} style="display: none;"{/if}
+                    data-id="A-{$field_show[0]}-{$field_show[1]}" {if (!empty($field_show[0]) && $core.config.{$field_show[0]} != $field_show[1])} style="display: none;"{/if}
                 {/capture}
             {else}
                 {assign dependent_fields ''}
@@ -16,12 +16,17 @@
 
             {if 'divider' == $entry.type}
                 {if !$entry@first}
-                    </div>
-                    <div class="wrap-group" {$dependent_fields}>
+        </div>
+        <div class="wrap-group" {$dependent_fields}>
                 {/if}
                 <a name="{$entry.name}"></a>
                 <div class="wrap-group-heading" {$dependent_fields}>
+
+                {if ( isset($entry.options.multilingual) && $entry.options.multilingual)}
+                    {$entry.description|escape}
+                {else}
                     {$entry.value|escape}
+                {/if}
 
                     {if isset($tooltips[$entry.name])}
                         <a href="#" class="js-tooltip" data-placement="right" title="{$tooltips[$entry.name]}"><i class="i-info"></i></a>
@@ -70,7 +75,7 @@
                         <div class="item-input">
                             <input type="password" class="js-input-password" name="v[{$entry.name}]" id="{$entry.name}" value="{$entry.value|escape}" autocomplete="new-password" />
                         </div>
-                    {elseif ('text' == $entry.type) or ('number' == $entry.type)}
+                    {elseif ('text' == $entry.type) or ('number' == $entry.type) or ('tel' == $entry.type) or ('email' == $entry.type)}
                         {if 'captcha_preview' == $entry.name}
                             {captcha preview=true}
                         {else}
@@ -83,7 +88,7 @@
                             <div class="translate-group item-input" id="language-group-{$entry.name}">
                                 <div class="translate-group__default">
                                     <div class="translate-group__item">
-                                        <input type="{$entry.type}" name="v[{$entry.name}]{if $isMultilingual}[{$core.language.iso}]{/if}" id="{$entry.name}-{$core.language.iso}" value="{{($isMultilingual) ? $entry.value[$core.language.iso] : $entry.value}|escape}" {if isset ($tooltips[$entry.name|cat:"_title"])} title='{$tooltips[$entry.name|cat:"_title"]}' {/if} {if ($entry.pattern != "")} pattern="{$entry.pattern}" {/if}  {if $entry.maxlength != 0} maxlength="{$entry.maxlength}" {/if} {if ($entry.placeholder != "")} placeholder="{$entry.placeholder}" {/if} {if ($entry.required == "1")} required {/if}/>
+                                        <input type="{$entry.type}" name="v[{$entry.name}]{if $isMultilingual}[{$core.language.iso}]{/if}" id="{$entry.name}-{$core.language.iso}" value="{{($isMultilingual) ? $entry.value[$core.language.iso] : $entry.value}|escape}" {if isset ($tooltips[$entry.name|cat:"_title"])} title='{$tooltips[$entry.name|cat:"_title"]}' {/if} {if isset ($tooltips[$entry.name|cat:"_placeholder"])} placeholder='{$tooltips[$entry.name|cat:"_placeholder"]}' {/if} {if ($entry.pattern != "")} pattern="{$entry.pattern}" {/if} {if ($entry.maxlength != 0)} maxlength="{$entry.maxlength}" {/if} {if ($entry.required == "1")} required {/if} />
                                         {if $isMultilingual && count($core.languages) > 1}
                                             <div class="translate-group__item__code">
                                                 {$core.language.title|escape}
@@ -96,7 +101,7 @@
                                         {foreach $core.languages as $iso => $language}
                                             {if $iso != $core.language.iso}
                                                 <div class="translate-group__item">
-                                                    <input type="text" name="v[{$entry.name}][{$iso}]" id="{$entry.name}-{$iso}" value="{$entry.value[$iso]|escape}" />
+                                                    <input type="{$entry.type}" name="v[{$entry.name}][{$iso}]" id="{$entry.name}-{$iso}" value="{$entry.value[$iso]|escape}" {if isset ($tooltips[$entry.name|cat:"_title"])} title='{$tooltips[$entry.name|cat:"_title"]}' {/if} {if isset ($tooltips[$entry.name|cat:"_placeholder"])} placeholder='{$tooltips[$entry.name|cat:"_placeholder"]}' {/if} {if ($entry.pattern != "")} pattern="{$entry.pattern}" {/if} {if ($entry.maxlength != 0)} maxlength="{$entry.maxlength}" {/if} {if ($entry.required == "1")} required {/if} />
                                                     <span class="translate-group__item__code">{$language.title|escape}</span>
                                                 </div>
                                             {/if}
@@ -182,7 +187,7 @@ $(function() {
                         {/if}
 
                         <div class="item-input">
-                            {html_radio_switcher value=$entry.value name=$entry.name conf=true}
+                            {html_radio_switcher value=$entry.value name=$entry.name conf=true titleOn=$tooltips[$entry.name|cat:"_title_on"] titleOff=$tooltips[$entry.name|cat:"_title_off"]}
                         </div>
                     {elseif 'select' == $entry.type}
                         {if $custom}
