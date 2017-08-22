@@ -1,29 +1,4 @@
 <?php
-/******************************************************************************
- *
- * Subrion - open source content management system
- * Copyright (C) 2017 Intelliants, LLC <https://intelliants.com>
- *
- * This file is part of Subrion.
- *
- * Subrion is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Subrion is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Subrion. If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * @link https://subrion.org/
- *
- ******************************************************************************/
-
 class iaView extends abstractUtil
 {
     const DEFAULT_ACTION = 'index';
@@ -269,16 +244,16 @@ class iaView extends abstractUtil
         $menuGroups = $iaDb->assoc(['id', 'name'], $stmt . ' ORDER BY `order`', 'admin_pages_groups');
 
         $sql = <<<SQL
-SELECT g.`name` `config`, e.`type`, p.`id`, p.`group`, p.`name`, p.`parent`, p.`attr`, p.`alias`, p.`module` 
-	FROM `:prefix:table_admin_pages` p 
-LEFT JOIN `:prefix:table_config_groups` g ON 
-	(p.`module` IN (':module') AND p.`module` = g.`module`) 
-LEFT JOIN `:prefix:table_modules` e ON 
-	(p.`module` = e.`name`) 
-WHERE p.`group` IN (:groups) 
-	AND FIND_IN_SET('menu', p.`menus`) 
-	AND p.`status` = ':status' 
-	AND p.`module` IN ('',':module') 
+SELECT g.`name` `config`, e.`type`, p.`id`, p.`group`, p.`name`, p.`parent`, p.`attr`, p.`alias`, p.`module`
+	FROM `:prefix:table_admin_pages` p
+LEFT JOIN `:prefix:table_config_groups` g ON
+	(p.`module` IN (':module') AND p.`module` = g.`module`)
+LEFT JOIN `:prefix:table_modules` e ON
+	(p.`module` = e.`name`)
+WHERE p.`group` IN (:groups)
+	AND FIND_IN_SET('menu', p.`menus`)
+	AND p.`status` = ':status'
+	AND p.`module` IN ('',':module')
 ORDER BY p.`order`
 SQL;
         $sql = iaDb::printf($sql, [
@@ -578,9 +553,9 @@ SQL;
                 $rows = $cache;
             } else {
                 $sql = <<<SQL
-SELECT m.*, p.`nofollow`, p.`new_window`, p.`action`, p.`custom_url` 
-	FROM `:prefixmenus` m 
-LEFT JOIN `:prefixpages` p ON (p.`name` = m.`page_name`) 
+SELECT m.*, p.`nofollow`, p.`new_window`, p.`action`, p.`custom_url`
+	FROM `:prefixmenus` m
+LEFT JOIN `:prefixpages` p ON (p.`name` = m.`page_name`)
 WHERE m.`menu_id` = :menu
 ORDER BY m.`level`, m.`id`
 SQL;
@@ -732,11 +707,11 @@ SQL;
         }
 
         $sql = <<<SQL
-SELECT p.`id`, p.`name`, p.`alias`, p.`action`, p.`module`, p.`filename`, p.`parent`, p.`group`, 
-	e.`type`, e.`url` 
-FROM `:prefix:table_pages` p 
-LEFT JOIN `:prefix:table_modules` e ON (e.`name` = p.`module`) 
-WHERE :where AND p.`status` = ':status' AND (e.`status` = ':status' OR e.`status` IS NULL) 
+SELECT p.`id`, p.`name`, p.`alias`, p.`action`, p.`module`, p.`filename`, p.`parent`, p.`group`,
+	e.`type`, e.`url`
+FROM `:prefix:table_pages` p
+LEFT JOIN `:prefix:table_modules` e ON (e.`name` = p.`module`)
+WHERE :where AND p.`status` = ':status' AND (e.`status` = ':status' OR e.`status` IS NULL)
 ORDER BY LENGTH(p.`alias`) DESC, p.`module` DESC
 SQL;
         $sql = iaDb::printf($sql, [
@@ -812,6 +787,9 @@ SQL;
 
             $key = 'page_meta_keywords_' . $pageParams['name'];
             $pageParams['keywords'] = iaLanguage::exists($key) ? iaLanguage::get($key) : null;
+
+            $key = 'page_meta_og_description_' . $pageParams['name'];
+            $pageParams['og_description'] = iaLanguage::exists($key) ? iaLanguage::get($key) : null;
         }
 
         if (isset($this->iaCore->requestPath[0])
@@ -951,6 +929,7 @@ SQL;
                 if (iaCore::ACCESS_FRONT == $this->iaCore->getAccessType()) {
                     $core['page']['meta-description'] = iaSanitize::html($this->get('description'));
                     $core['page']['meta-keywords'] = iaSanitize::html($this->get('keywords'));
+                    $core['page']['meta-og-description'] = iaSanitize::html($this->get('og_description'));
 
                     $this->_logStatistics();
 

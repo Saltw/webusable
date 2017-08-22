@@ -1,28 +1,4 @@
 <?php
-/******************************************************************************
- *
- * Subrion - open source content management system
- * Copyright (C) 2017 Intelliants, LLC <https://intelliants.com>
- *
- * This file is part of Subrion.
- *
- * Subrion is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Subrion is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Subrion. If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * @link https://subrion.org/
- *
- ******************************************************************************/
 
 class iaBackendController extends iaAbstractControllerBackend
 {
@@ -314,13 +290,13 @@ class iaBackendController extends iaAbstractControllerBackend
         $homePageTitle = $this->_iaDb->one_bind('value', '`key` = :key AND `category` = :category',
             ['key' => 'page_title_' . $this->_iaCore->get('home_page'), 'category' => iaLanguage::CATEGORY_PAGE], iaLanguage::getTable());
 
-        list($title, $content, $metaDescription, $metaKeywords) = $this->_loadMultilingualData($entryData['name']);
+        list($title, $content, $metaDescription, $metaKeywords, $metaOgDescription) = $this->_loadMultilingualData($entryData['name']);
 
         $iaView->assign('title', $title);
         $iaView->assign('content', $content);
         $iaView->assign('metaDescription', $metaDescription);
         $iaView->assign('metaKeywords', $metaKeywords);
-
+        $iaView->assign('metaOgDescription', $metaOgDescription);
         $iaView->assign('isHomePage', $isHomepage);
         $iaView->assign('homePageTitle', $homePageTitle);
         $iaView->assign('extensions', $this->getHelper()->extendedExtensions);
@@ -340,10 +316,10 @@ class iaBackendController extends iaAbstractControllerBackend
 
         if ($this->_iaCore->factory('acl')->isAccessible($this->getName(), iaCore::ACTION_ADD)) {
             $sql = <<<SQL
-SELECT m.`removable`, m.`id`, p.`value` `title` 
-	FROM `:prefix:table_menus` m 
-LEFT JOIN `:prefix:table_phrases` p ON (p.`key` = CONCAT('block_title_', m.`id`) && p.`code` = ':lang') 
-WHERE m.`type` = 'menu' 
+SELECT m.`removable`, m.`id`, p.`value` `title`
+	FROM `:prefix:table_menus` m
+LEFT JOIN `:prefix:table_phrases` p ON (p.`key` = CONCAT('block_title_', m.`id`) && p.`code` = ':lang')
+WHERE m.`type` = 'menu'
 ORDER BY `title`
 SQL;
             $sql = iaDb::printf($sql, [
@@ -449,14 +425,15 @@ SQL;
 
     private function _loadMultilingualData($pageName)
     {
-        $title = $content = $metaDescription = $metaKeywords = [];
+        $title = $content = $metaDescription = $metaKeywords = $metaOgDescription = [];
 
         if (isset($_POST['save'])) {
-            list($title, $content, $metaDescription, $metaKeywords) = [
+            list($title, $content, $metaDescription, $metaKeywords, $metaOgDescription) = [
                 $_POST['title'],
                 $_POST['content'],
                 $_POST['meta_description'],
-                $_POST['meta_keywords']
+                $_POST['meta_keywords'],
+                $_POST['meta_og_description']
             ];
         } elseif (iaCore::ACTION_EDIT == $this->_iaCore->iaView->get('action')) {
             $this->_iaDb->setTable(iaLanguage::getTable());
@@ -469,17 +446,19 @@ SQL;
                 "`key` = 'page_meta_description_{$pageName}' AND `category` = 'page'");
             $metaKeywords = $this->_iaDb->keyvalue(['code', 'value'],
                 "`key` = 'page_meta_keywords_{$pageName}' AND `category` = 'page'");
+            $metaOgDescription = $this->_iaDb->keyvalue(['code', 'value'],
+                "`key` = 'page_meta_og_description_{$pageName}' AND `category` = 'page'");
 
             $this->_iaDb->resetTable();
         }
 
-        return [$title, $content, $metaDescription, $metaKeywords];
+        return [$title, $content, $metaDescription, $metaKeywords, $metaOgDescription];
     }
 
     private function _saveMultilingualData($pageName, $module)
     {
         foreach ($this->_iaCore->languages as $iso => $language) {
-            foreach (['title', 'content', 'meta_description', 'meta_keywords'] as $key) {
+            foreach (['title', 'content', 'meta_description', 'meta_keywords', 'meta_og_description'] as $key) {
                 if (isset($_POST[$key][$iso])) {
                     $phraseKey = sprintf('page_%s_%s', $key, $pageName);
 

@@ -183,7 +183,7 @@
                         <div class="translate-group" id="language-group-meta_description">
                             <div class="translate-group__default">
                                 <div class="translate-group__item">
-                                    <textarea name="meta_description[{$core.language.iso}]" rows="2" id="meta_description-{$core.language.iso}">{if isset($metaDescription[$core.language.iso])}{$metaDescription[$core.language.iso]|escape}{/if}</textarea>
+                                    <textarea name="meta_description[{$core.language.iso}]" rows="2" maxlength="155" id="meta_description-{$core.language.iso}">{if isset($metaDescription[$core.language.iso])}{$metaDescription[$core.language.iso]|escape}{/if}</textarea>
                                     <div class="translate-group__item__code">{$core.language.title|escape}</div>
                                 </div>
                             </div>
@@ -191,7 +191,7 @@
                                 {foreach $core.languages as $iso => $language}
                                     {if $iso != $core.language.iso}
                                         <div class="translate-group__item">
-                                            <textarea name="meta_description[{$iso}]" rows="2">{if isset($metaDescription.$iso)}{$metaDescription.$iso|escape}{/if}</textarea>
+                                            <textarea name="meta_description[{$iso}]" rows="2" maxlength="155">{if isset($metaDescription.$iso)}{$metaDescription.$iso|escape}{/if}</textarea>
                                             <span class="translate-group__item__code">{$language.title|escape}</span>
                                         </div>
                                     {/if}
@@ -199,8 +199,9 @@
                             </div>
                         </div>
                     {else}
-                        <textarea name="meta_description[{$core.language.iso}]" rows="2">{if isset($metaDescription[$core.language.iso])}{$metaDescription[$core.language.iso]|escape}{/if}</textarea>
+                        <textarea name="meta_description[{$core.language.iso}]" rows="2" maxlength="155">{if isset($metaDescription[$core.language.iso])}{$metaDescription[$core.language.iso]|escape}{/if}</textarea>
                     {/if}
+                    <p class="help-block">{lang key='meta_description_help_block'}</p>
                 </div>
             </div>
 
@@ -237,6 +238,43 @@
                     {else}
                         <input type="text" name="meta_keywords[{$core.language.iso}]"{if isset($metaKeywords[$core.language.iso])} value="{$metaKeywords[$core.language.iso]|escape}"{/if}>
                     {/if}
+                    <p class="help-block">{lang key='meta_keywords_help_block'}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-2">
+                    {if count($core.languages) > 1}
+                        <div class="btn-group btn-group-xs translate-group-actions">
+                            <button type="button" class="btn btn-default js-edit-lang-group" data-group="#language-group-meta_og_description"><span class="i-earth"></span></button>
+                            <button type="button" class="btn btn-default js-copy-lang-group" data-group="#language-group-meta_og_description"><span class="i-copy"></span></button>
+                        </div>
+                    {/if}
+                    <label class="control-label">{lang key='meta_og_description'}</label>
+                </div>
+                <div class="col col-lg-4">
+                    {if count($core.languages) > 1}
+                        <div class="translate-group" id="language-group-meta_og_description">
+                            <div class="translate-group__default">
+                                <div class="translate-group__item">
+                                    <textarea name="meta_og_description[{$core.language.iso}]" rows="2" maxlength="200" id="meta_og_description-{$core.language.iso}">{if isset($metaOgDescription[$core.language.iso])}{$metaOgDescription[$core.language.iso]|escape}{/if}</textarea>
+                                    <div class="translate-group__item__code">{$core.language.title|escape}</div>
+                                </div>
+                            </div>
+                            <div class="translate-group__langs">
+                                {foreach $core.languages as $iso => $language}
+                                    {if $iso != $core.language.iso}
+                                        <div class="translate-group__item">
+                                            <textarea name="meta_og_description[{$iso}]" rows="2" maxlength="200">{if isset($metaOgDescription.$iso)}{$metaOgDescription.$iso|escape}{/if}</textarea>
+                                            <span class="translate-group__item__code">{$language.title|escape}</span>
+                                        </div>
+                                    {/if}
+                                {/foreach}
+                            </div>
+                        </div>
+                    {else}
+                        <textarea name="meta_og_description[{$core.language.iso}]" rows="2" maxlength="200">{if isset($metaOgDescription[$core.language.iso])}{$metaOgDescription[$core.language.iso]|escape}{/if}</textarea>
+                    {/if}
+                    <p class="help-block">{lang key='meta_og_description_help_block'}</p>
                 </div>
             </div>
         </div>
@@ -275,6 +313,7 @@
                     {else}
                         <input type="text" name="title[{$core.language.iso}]"{if isset($title[$core.language.iso])} value="{$title[$core.language.iso]|escape}"{/if}>
                     {/if}
+                    <p class="help-block">{lang key='title_help_block'}</p>
                 </div>
             </div>
 

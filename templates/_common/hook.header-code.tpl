@@ -1,5 +1,6 @@
 {$core.config.frontend_header_code}
 
+<!-- Open Graph general (Facebook, Pinterest & Google+) -->
 {if isset($core.page.info.og)}
     {foreach $core.page.info.og as $key => $value}
         <meta property="og:{$key}" content="{if $key == 'description'}{$value|strip_tags|escape|truncate:200}{else}{$value|strip_tags|escape}{/if}">
@@ -10,7 +11,7 @@
 {else}
     <meta property="og:title" content="{$core.page.title|escape}">
     <meta property="og:url" content="{$smarty.const.IA_SELF}">
-    <meta property="og:description" content="{$core.config.opengraph_description|strip_tags|escape}">
+    <meta property="og:description" content="{$core.page['meta-og-description']}">
 {/if}
 
 {if !isset($noImage) && $core.config.opengraph_image}
