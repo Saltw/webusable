@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="{$core.language.iso}" dir="{$core.language.direction}">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <title>{ia_print_title}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="generator" content="Subrion CMS - Open Source Content Management System">
-        <base href="{$smarty.const.IA_ADMIN_URL}">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="none" />
+        <base href="{$smarty.const.IA_ADMIN_URL}" />
 
         <!--[if lt IE 9]>
             <script src="../../../js/utils/shiv.js"></script>
