@@ -788,6 +788,12 @@ SQL;
             $key = 'page_meta_keywords_' . $pageParams['name'];
             $pageParams['keywords'] = iaLanguage::exists($key) ? iaLanguage::get($key) : null;
 
+            $key = 'page_meta_og_title_' . $pageParams['name'];
+            $pageParams['og_title'] = iaLanguage::exists($key) ? iaLanguage::get($key) : null;
+
+            $key = 'page_meta_og_type_' . $pageParams['name'];
+            $pageParams['og_type'] = iaLanguage::exists($key) ? iaLanguage::get($key) : null;
+
             $key = 'page_meta_og_description_' . $pageParams['name'];
             $pageParams['og_description'] = iaLanguage::exists($key) ? iaLanguage::get($key) : null;
         }
@@ -929,6 +935,8 @@ SQL;
                 if (iaCore::ACCESS_FRONT == $this->iaCore->getAccessType()) {
                     $core['page']['meta-description'] = iaSanitize::html($this->get('description'));
                     $core['page']['meta-keywords'] = iaSanitize::html($this->get('keywords'));
+                    $core['page']['meta-og-title'] = iaSanitize::html($this->get('og_title'));
+                    $core['page']['meta-og-type'] = iaSanitize::html($this->get('og_type'));
                     $core['page']['meta-og-description'] = iaSanitize::html($this->get('og_description'));
 
                     $this->_logStatistics();

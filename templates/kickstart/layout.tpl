@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="{$core.language.iso}" dir="{$core.language.direction}">
 <head>
-    {ia_hooker name='smartyFrontBeforeHeadSection'}
     <!-- COMMON TAGS -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Search Engine -->
     <title>{ia_print_title}</title>
-    <meta name="description" content="{$core.page['meta-description']}">
+    <meta name="description" content="{$core.page['meta-description']}" />
 {if $core.page['meta-keywords'] != ""}
     <meta name="keywords" content="{$core.page['meta-keywords']}" />
 {/if}
@@ -16,6 +15,8 @@
     <meta name="robots" content="follow" />
     <meta name="revisit-after" content="1 day" />
     <base href="{$smarty.const.IA_URL}">
+    <!-- Meta tags Sociales -> /templates/_common/hook.header-code.tpl -->
+    {ia_hooker name='smartyFrontAfterHeadSection'}
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -27,9 +28,6 @@
 
     {ia_add_media files='jquery, subrion, bootstrap' order=0}
     {ia_print_js files='_IA_TPL_app' order=999}
-
-    <!-- /templates/_common/hook.header-code.tpl + v[frontend_header_code] (panel/configuration/miscellaneous) -->
-    {ia_hooker name='smartyFrontAfterHeadSection'}
 
     {ia_print_css display='on'}
     {include '_layout/custom-colors.tpl'}
@@ -44,6 +42,11 @@
 
     {include '_seo/structured-data.tpl'}
 
+    <!-- v[frontend_header_code] (panel/configuration/miscellaneous) -->
+   {$core.config.frontend_header_code}
+    <!-- v[frontend_footer_code] (panel/configuration/miscellaneous) -->
+    <!-- Véase antes del cierre del body -->
+   {ia_hooker name='smartyFrontBeforeHeadSection'}
 </head>
 
     <body class="page-{$core.page.name}">

@@ -290,12 +290,14 @@ class iaBackendController extends iaAbstractControllerBackend
         $homePageTitle = $this->_iaDb->one_bind('value', '`key` = :key AND `category` = :category',
             ['key' => 'page_title_' . $this->_iaCore->get('home_page'), 'category' => iaLanguage::CATEGORY_PAGE], iaLanguage::getTable());
 
-        list($title, $content, $metaDescription, $metaKeywords, $metaOgDescription) = $this->_loadMultilingualData($entryData['name']);
+        list($title, $content, $metaDescription, $metaKeywords, $metaOgTitle, $metaOgType, $metaOgDescription) = $this->_loadMultilingualData($entryData['name']);
 
         $iaView->assign('title', $title);
         $iaView->assign('content', $content);
         $iaView->assign('metaDescription', $metaDescription);
         $iaView->assign('metaKeywords', $metaKeywords);
+        $iaView->assign('metaOgTitle', $metaOgTitle);
+        $iaView->assign('metaOgType', $metaOgType);
         $iaView->assign('metaOgDescription', $metaOgDescription);
         $iaView->assign('isHomePage', $isHomepage);
         $iaView->assign('homePageTitle', $homePageTitle);
@@ -425,14 +427,16 @@ SQL;
 
     private function _loadMultilingualData($pageName)
     {
-        $title = $content = $metaDescription = $metaKeywords = $metaOgDescription = [];
+        $title = $content = $metaDescription = $metaKeywords = $metaOgTitle = $metaOgType = $metaOgDescription = [];
 
         if (isset($_POST['save'])) {
-            list($title, $content, $metaDescription, $metaKeywords, $metaOgDescription) = [
+            list($title, $content, $metaDescription, $metaKeywords, $metaOgTitle, $metaOgType, $metaOgDescription) = [
                 $_POST['title'],
                 $_POST['content'],
                 $_POST['meta_description'],
                 $_POST['meta_keywords'],
+                $_POST['meta_og_title'],
+                $_POST['meta_og_type'],
                 $_POST['meta_og_description']
             ];
         } elseif (iaCore::ACTION_EDIT == $this->_iaCore->iaView->get('action')) {
@@ -446,19 +450,23 @@ SQL;
                 "`key` = 'page_meta_description_{$pageName}' AND `category` = 'page'");
             $metaKeywords = $this->_iaDb->keyvalue(['code', 'value'],
                 "`key` = 'page_meta_keywords_{$pageName}' AND `category` = 'page'");
+            $metaOgTitle= $this->_iaDb->keyvalue(['code', 'value'],
+                "`key` = 'page_meta_og_title_{$pageName}' AND `category` = 'page'");
+            $metaOgType= $this->_iaDb->keyvalue(['code', 'value'],
+                "`key` = 'page_meta_og_type_{$pageName}' AND `category` = 'page'");
             $metaOgDescription = $this->_iaDb->keyvalue(['code', 'value'],
                 "`key` = 'page_meta_og_description_{$pageName}' AND `category` = 'page'");
 
             $this->_iaDb->resetTable();
         }
 
-        return [$title, $content, $metaDescription, $metaKeywords, $metaOgDescription];
+        return [$title, $content, $metaDescription, $metaKeywords, $metaOgTitle, $metaOgType, $metaOgDescription];
     }
 
     private function _saveMultilingualData($pageName, $module)
     {
         foreach ($this->_iaCore->languages as $iso => $language) {
-            foreach (['title', 'content', 'meta_description', 'meta_keywords', 'meta_og_description'] as $key) {
+            foreach (['title', 'content', 'meta_description', 'meta_keywords', 'meta_og_title', 'meta_og_type','meta_og_description'] as $key) {
                 if (isset($_POST[$key][$iso])) {
                     $phraseKey = sprintf('page_%s_%s', $key, $pageName);
 
