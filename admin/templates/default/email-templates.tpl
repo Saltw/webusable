@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /email-templates.tpl</h1>
+
 <form method="post" id="js-email-template-form" class="sap-form form-horizontal">
     {preventCsrf}
 

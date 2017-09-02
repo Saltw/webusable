@@ -1,29 +1,4 @@
 <?php
-
-/******************************************************************************
- *
- * Subrion - open source content management system
- * Copyright (C) 2017 Intelliants, LLC <https://intelliants.com>
- *
- * This file is part of Subrion.
- *
- * Subrion is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Subrion is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Subrion. If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * @link https://subrion.org/
- *
- ******************************************************************************/
 class iaBlog extends abstractModuleAdmin
 {
     const ALIAS_SUFFIX = '.html';
@@ -90,7 +65,7 @@ class iaBlog extends abstractModuleAdmin
             $result[] = (bool)$this->iaDb->delete(iaDb::convertIds($id, 'blog_id'), $this->_tableBlogEntriesTags);
 
             $sql = <<<SQL
-DELETE FROM `:prefix:table_blog_tags` 
+DELETE FROM `:prefix:table_blog_tags`
 WHERE `id` NOT IN (SELECT DISTINCT `tag_id` FROM `:prefix:table_blog_entries_tags`)
 SQL;
             $sql = iaDb::printf($sql, [
@@ -114,8 +89,8 @@ SQL;
     public function getTags($id)
     {
         $sql = <<<SQL
-SELECT GROUP_CONCAT(`title`) 
-	FROM `:prefix:table_blog_tags` bt 
+SELECT GROUP_CONCAT(`title`)
+	FROM `:prefix:table_blog_tags` bt
 WHERE `id` IN (SELECT `tag_id` FROM `:prefix:table_blog_entries_tags` WHERE `blog_id` = :id)
 SQL;
         $sql = iaDb::printf($sql, [
@@ -134,9 +109,9 @@ SQL;
 
         $stmt = '`status` = :status';
         $this->iaDb->bind($stmt, ['status' => iaCore::STATUS_ACTIVE]);
-        if ($rows = $this->iaDb->all(['id', 'alias'], $stmt, null, null, self::getTable())) {
+        if ($rows = $this->iaDb->all(['alias'], $stmt, null, null, self::getTable())) {
             foreach ($rows as $row) {
-                $result[] = IA_URL . 'blog' . IA_URL_DELIMITER . $row['id'] . '-' . $row['alias'];
+                $result[] = IA_URL . 'blog' . IA_URL_DELIMITER . $row['alias'];
             }
         }
 

@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /database.tpl</h1>
+
 {switch $action}
     {case 'sql' break}
     {if isset($queryOut)}

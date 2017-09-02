@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /modules.tpl</h1>
+
 {if $modules}
     <input type="hidden" id="js-default-package-value" value="{$core.config.default_package}">
 

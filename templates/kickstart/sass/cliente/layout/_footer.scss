@@ -52,7 +52,7 @@
 
             ul.redes {
                 $map:(
-                    bg: $color-footer,
+                    bg: transparent,
                     color: $color-b,
                     opacity: 0.9);
                 @include sociales($map...);

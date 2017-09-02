@@ -1,4 +1,5 @@
 <?php
+# /admin /templates /default /pages.tpl 
 
 class iaBackendController extends iaAbstractControllerBackend
 {

@@ -13,15 +13,14 @@
             <script src="../../../js/utils/respond.min.js"></script>
         <![endif]-->
 
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$img}ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$img}ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$img}ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="{$img}ico/apple-touch-icon-57-precomposed.png">
-        <link rel="shortcut icon" href="{$img}ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$img}ios/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$img}ios/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="{$img}ios/apple-touch-icon-57x57-precomposed.png">
+        <link rel="shortcut icon" href="{$img}favicon.ico">
 
         {ia_hooker name='smartyAdminAfterHeadSection'}
 
-        {ia_print_css files="bootstrap-{$core.config.sap_style}" order=0}
+        {ia_print_css files="bootstrap-{$core.config.sap_style}, admin" order=0}
 
         {ia_add_media files='jquery, extjs, subrion' order=0}
         {ia_print_js files='_IA_TPL_enquire.min, _IA_TPL_app'}
@@ -34,21 +33,23 @@
             {/foreach}
             intelli.config.admin_url = '{$smarty.const.IA_URL}{$core.config.admin_page}';
         {/ia_add_js}
+
+        <link href="https://file.myfontastic.com/vZAdggHYUGUDagzSJeFnJj/icons.css" rel="stylesheet">
     </head>
     <body id="page--{$core.page.name}" class="ss-{$core.config.sap_style}">
         <div class="overall-wrapper">
             <div class="panels-wrapper">
                 <div class="m-header">
                     <a class="m-header__brand" href="{$smarty.const.IA_ADMIN_URL}">
-                        <img src="{$img}logo.png" alt="Subrion CMS &middot; {$core.config.version}">
+                        <img src="{$img}logo.png" alt="WebUsable CMS &middot; {$core.config.version}" title="{lang key='dashboard'}">
                     </a>
                     <a href="#" class="m-header__toggle"><span class="fa fa-bars"></span></a>
                 </div>
-                <section id="panel-left">
+                <section id="panel-left" style="background: blue">
                     <a class="brand" href="{$smarty.const.IA_ADMIN_URL}">
-                        <img src="{$img}logo.png" alt="Subrion CMS &middot; {$core.config.version}">
+                        <img src="{$img}logo.png" alt="WebUsable CMS &middot; {$core.config.version}" title="{lang key='dashboard'}">
                     </a>
-                    <ul class="nav-main">
+                    <ul class="nav-main" style="background: lime">
                         <li{if 0 == $core.page.info.group} class="current active"{/if}>
                             <a href="{$smarty.const.IA_ADMIN_URL}" class="dashboard" data-toggle="nav-sub-dashboard"><i class="i-gauge"></i>{lang key='dashboard'}</a>
                         </li>
@@ -59,15 +60,23 @@
                         {/foreach}
                     </ul>
                     <div class="system-info">
-                        Subrion CMS
+                        WebUsable CMS
                         <br>
                         <span class="version">v {$core.config.version}</span>
                     </div>
-                    <div class="social-links">
-                        <a href="https://twitter.com/IntelliantsLLC" target="_blank" class="social-links__twitter"><span class="fa fa-twitter"></span></a>
-                        <a href="https://www.facebook.com/Intelliants" target="_blank" class="social-links__facebook"><span class="fa fa-facebook"></span></a>
-                        <a href="https://github.com/intelliants/subrion" target="_blank" class="social-links__github"><span class="fa fa-github"></span></a>
-                    </div>
+                    <nav class="">
+                        <ul class="main-centro redes sociales">
+                            <li>
+                                <a href="https://twitter.com/WebUsableTeam" target="_blank" class="icon-twitter abcentro"></a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/people/Sonia-%C3%81lvarez-Brasa/100012485085316" target="_blank" class="icon-facebook abcentro"></a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/Saltw/webusable" target="_blank" class="icon-github abcentro"></a>
+                            </li>
+                        </ul>
+                    </nav>
                 </section>
 
                 <section id="panel-center" class="{if isset($smarty.cookies.panelHidden) && '1' == $smarty.cookies.panelHidden}is-hidden{/if}">
@@ -92,7 +101,7 @@
 
                 <section id="panel-content">
                     <div class="navbar">
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-right" style="background: tomato">
                             <li>
                                 <a href="{$smarty.const.IA_URL}" title="{lang key='site_home'}" target="_blank"><i class="fa fa-desktop"></i><span> {lang key='site_home'}</span></a>
                             </li>
@@ -232,7 +241,7 @@
             </div>
 
             <!-- Feedback modal -->
-            <div class="modal fade" id="feedback-modal">
+            <div class="modal fade" id="feedback-modal" style="background: yellow">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form method="post" class="sap-form form-horizontal">

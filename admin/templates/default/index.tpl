@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /index.tpl</h1>
+
 {if isset($text_content)}
     <div style="width:99%" xmlns="http://www.w3.org/1999/html">{$text_content}</div>
 {else}

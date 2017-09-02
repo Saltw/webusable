@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /permissions.tpl</h1>
+
 {if !isset($permissions)}
     <div class="row">
         <div class="col col-lg-6">

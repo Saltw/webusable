@@ -256,16 +256,6 @@ WHERE p.`group` IN (:groups)
 	AND p.`module` IN ('',':module')
 ORDER BY p.`order`
 SQL;
-
-        $catPlugins = <<< CATPLUGINS
-SELECT `name` `categorias` FROM `wu_admin_pages` WHERE `module` <> ''
-CATPLUGINS;
-
-        $catPlugins = iaDb::printf($catPlugins, [
-            'prefix' => $iaDb->prefix,
-            'table_admin_pages' => 'admin_pages'
-        ]);
-
         $sql = iaDb::printf($sql, [
             'prefix' => $iaDb->prefix,
             'table_admin_pages' => 'admin_pages',
@@ -278,7 +268,6 @@ CATPLUGINS;
 
         foreach ($iaDb->getAll($sql) as $row) {
             isset($menuGroups[$row['group']]['items']) || $menuGroups[$row['group']]['items'] = [];
-
             $menuGroups[$row['group']]['items'][] = $row;
         }
 
@@ -299,7 +288,7 @@ CATPLUGINS;
                     break;
 
                 case ($row['module']):
-                    $row['config'] = $row['module'];
+                    $row['config'] = $row['name'];
 
                     $configGroups['plugins'][$row['module']] = $row;
 
@@ -324,7 +313,6 @@ CATPLUGINS;
 
             $menuEntry['id'] = $id;
             $menuEntry['title'] = iaLanguage::get('pages_group_' . $menuEntry['name']);
-            // $menuEntry['cat'] = $menuEntry['name']);
             $menuEntry['items'] = [];
 
             if (1 == $id) { // the group 'System'

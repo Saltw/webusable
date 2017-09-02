@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /fields-system.tpl</h1>
+
 {if !isset($noSystemFields)}
 <div class="wrap-group">
     <div class="wrap-group-heading">{lang key='system_fields'}</div>

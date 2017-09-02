@@ -1,48 +1,45 @@
+<!-- /modules /blog /index.php -->
+
 <form method="post" enctype="multipart/form-data" class="sap-form form-horizontal">
     {preventCsrf}
 
+    <h1>modules /blog /templates /admin /blog.tpl</h1>
     <div class="wrap-list">
         <div class="wrap-group">
             <div class="wrap-group-heading">
                 <h4>{lang key='general'}</h4>
             </div>
-
+            <!-- Categoría -->
             <div class="row">
-                <label class="col col-lg-2 control-label"
-                       for="input-title">{lang key='title'} {lang key='field_required'}</label>
+                <label class="col col-lg-2 control-label" for="input-categories">{lang key='category'} {lang key='field_required'}</label>
                 <div class="col col-lg-4">
-                    <input type="text" name="title" value="{$item.title|escape}" id="input-title">
+                    <select class="" name="categoria" required>
+                    {if (isset($item.categoria) && !empty($item.categoria))}
+                        <option value="{$item.categoria}">{$item.categoria}</option>
+                    {elseif !isset($item.categoria)}
+                        <option value="blog">Por defecto blog</option>
+                    {/if}
+                        <optgroup label="{lang key='categories'}">
+                            <option value="blog">blog</option>
+                            <option value="servicios">servicios</option>
+                        </optgroup>
+                    </select>
+                    <p class="help-block text-break-word">{lang key='select_category_from_list'}</p>
                 </div>
             </div>
-
+            <!-- title url -->
             <div class="row">
                 <label class="col col-lg-2 control-label" for="input-alias">{lang key='title_alias'}</label>
                 <div class="col col-lg-4">
                     <input type="text" name="alias" id="input-alias" value="{if isset($item.alias)}{$item.alias}{/if}">
-                    <p class="help-block text-break-word" id="title_box"
-                       style="display: none;">{lang key='page_url_will_be'}: <span id="title_url" class="text-danger">{$smarty.const.IA_URL}</span>
+                    <p class="help-block text-break-word" id="title_box">{lang key='page_url_will_be'}: <span id="title_url" class="text-danger">{$smarty.const.IA_URL}</span>
                     </p>
+                    <strong></strong>
                 </div>
             </div>
-
+            <!-- image -->
             <div class="row">
-                <label class="col col-lg-2 control-label"
-                       for="body">{lang key='body'} {lang key='field_required'}</label>
-                <div class="col col-lg-8">
-                    {ia_wysiwyg name='body' value=$item.body}
-                </div>
-            </div>
-
-            <div class="row">
-                <label class="col col-lg-2 control-label" for="input-tag">{lang key='tags'}</label>
-                <div class="col col-lg-4">
-                    <input type="text" name="tags" value="{$item.tags|escape}" id="input-tag">
-                    <p class="help-block text-break-word" id="title_box">{lang key='separate_with_comma_or_enter'}</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <label class="col col-lg-2 control-label" for="input-image">{lang key='image'}</label>
+                <label class="col col-lg-2 control-label" for="input-image">{lang key='blog_image'}</label>
                 <div class="col col-lg-4">
                     {if !empty($item.image)}
                         <div class="input-group thumbnail thumbnail-single with-actions">
@@ -61,6 +58,31 @@
                     {ia_html_file name='image' id='input-image'}
                 </div>
             </div>
+            <!-- Título -->
+            <div class="row">
+                <label class="col col-lg-2 control-label"
+                       for="input-title">{lang key='title'} {lang key='field_required'}</label>
+                <div class="col col-lg-4">
+                    <input type="text" name="title" value="{$item.title|escape}" id="input-title">
+                </div>
+            </div>
+            <!-- contenido -->
+            <div class="row">
+                <label class="col col-lg-2 control-label"
+                       for="body">{lang key='body'} {lang key='field_required'}</label>
+                <div class="col col-lg-8">
+                    {ia_wysiwyg name='body' value=$item.body}
+                </div>
+            </div>
+            <!-- Tags -->
+            <div class="row">
+                <label class="col col-lg-2 control-label" for="input-tag">{lang key='tags'}</label>
+                <div class="col col-lg-4">
+                    <input type="text" name="tags" value="{$item.tags|escape}" id="input-tag">
+                    <p class="help-block text-break-word" id="title_box">{lang key='separate_with_comma_or_enter'}</p>
+                </div>
+            </div>
+
         </div>
 
         {capture name='systems' append='fieldset_before'}

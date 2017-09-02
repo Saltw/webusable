@@ -1,3 +1,4 @@
+<!-- /admin /index.php -->
 {foreach $core.page.info.menu as $item}
     {if !empty($item.items)}
     <ul id="nav-sub-{$item.name}" class="nav-sub{if $core.page.info.group == $item.id} active{/if}">

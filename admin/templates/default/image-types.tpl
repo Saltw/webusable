@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /image-types.tpl</h1>
+
 <form method="post" class="sap-form form-horizontal">
     {preventCsrf}
 

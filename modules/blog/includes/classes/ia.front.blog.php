@@ -1,29 +1,4 @@
 <?php
-
-/******************************************************************************
- *
- * Subrion - open source content management system
- * Copyright (C) 2017 Intelliants, LLC <https://intelliants.com>
- *
- * This file is part of Subrion.
- *
- * Subrion is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Subrion is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Subrion. If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * @link https://subrion.org/
- *
- ******************************************************************************/
 class iaBlog extends abstractModuleFront
 {
     const ALIAS_SUFFIX = '.html';
@@ -73,12 +48,12 @@ class iaBlog extends abstractModuleFront
         $this->iaDb->bind($where, ['status' => iaCore::STATUS_ACTIVE, 'language' => $this->iaView->language]);
 
         $sql = <<<SQL
-SELECT SQL_CALC_FOUND_ROWS b.`id`, b.`title`, b.`date_added`, b.`body`, b.`alias`, b.`image`, m.`fullname` 
-	FROM `:prefix:table_blog_entries` b 
-LEFT JOIN `:prefix:table_members` m ON (b.`member_id` = m.`id`) 
-WHERE :where 
-GROUP BY b.`id` 
-ORDER BY :order 
+SELECT SQL_CALC_FOUND_ROWS b.`id`, b.`title`, b.`date_added`, b.`body`, b.`alias`, b.`image`, m.`fullname`
+	FROM `:prefix:table_blog_entries` b
+LEFT JOIN `:prefix:table_members` m ON (b.`member_id` = m.`id`)
+WHERE :where
+GROUP BY b.`id`
+ORDER BY :order
 LIMIT :start, :limit
 SQL;
         $sql = iaDb::printf($sql, [
@@ -97,9 +72,9 @@ SQL;
     public function getById($id, $decorate = true)
     {
         $sql = <<<SQL
-SELECT b.`id`, b.`title`, b.`date_added`, b.`body`, b.`alias`, b.`image`, m.`fullname`, b.`member_id` 
-	FROM `:prefix:table_blog_entries` b 
-LEFT JOIN `:prefix:table_members` m ON (b.`member_id` = m.`id`) 
+SELECT b.`id`, b.`title`, b.`date_added`, b.`body`, b.`alias`, b.`image`, m.`fullname`, b.`member_id`
+	FROM `:prefix:table_blog_entries` b
+LEFT JOIN `:prefix:table_members` m ON (b.`member_id` = m.`id`)
 WHERE b.`id` = :id AND b.`status` = ':status'
 SQL;
         $sql = iaDb::printf($sql, [
@@ -131,7 +106,7 @@ SQL;
             $result[] = (bool)$this->iaDb->delete(iaDb::convertIds($id, 'blog_id'), $this->_tableBlogEntriesTags);
 
             $sql = <<<SQL
-DELETE FROM `:prefix:table_blog_tags` 
+DELETE FROM `:prefix:table_blog_tags`
 WHERE `id` NOT IN (SELECT DISTINCT `tag_id`	FROM `:prefix:table_blog_entries_tags`)
 SQL;
             $sql = iaDb::printf($sql, [
@@ -156,8 +131,8 @@ SQL;
     {
         $sql = <<<SQL
 SELECT DISTINCT bt.`title`, bt.`alias`
-	FROM `:prefix:table_blog_tags` bt 
-LEFT JOIN `:prefix:table_blog_entries_tags` bet ON (bt.`id` = bet.`tag_id`) 
+	FROM `:prefix:table_blog_tags` bt
+LEFT JOIN `:prefix:table_blog_entries_tags` bet ON (bt.`id` = bet.`tag_id`)
 WHERE bet.`blog_id` = :id
 SQL;
         $sql = iaDb::printf($sql, [
@@ -173,8 +148,8 @@ SQL;
     public function getTagsString($blogEntryId)
     {
         $sql = <<<SQL
-SELECT GROUP_CONCAT(`title`) 
-	FROM `:prefix:table_blog_tags` bt 
+SELECT GROUP_CONCAT(`title`)
+	FROM `:prefix:table_blog_tags` bt
 WHERE `id` IN (SELECT `tag_id` FROM `:prefix:table_blog_entries_tags` WHERE `blog_id` = :id)
 SQL;
         $sql = iaDb::printf($sql, [
@@ -190,9 +165,9 @@ SQL;
     public function getAllTags()
     {
         $sql = <<<SQL
-SELECT bt.`title`, bt.`alias`, bet.`blog_id` 
-	FROM `:prefix:table_blog_tags` bt 
-LEFT JOIN `:prefix:table_blog_entries_tags` bet ON (bt.`id` = bet.`tag_id`) 
+SELECT bt.`title`, bt.`alias`, bet.`blog_id`
+	FROM `:prefix:table_blog_tags` bt
+LEFT JOIN `:prefix:table_blog_entries_tags` bet ON (bt.`id` = bet.`tag_id`)
 ORDER BY bt.`title`
 SQL;
         $sql = iaDb::printf($sql, [
@@ -211,11 +186,11 @@ SQL;
         $this->iaDb->setTable($this->_tableBlogEntriesTags);
 
         $sql = <<<SQL
-DELETE FROM `:prefix:table_blog_tags` 
+DELETE FROM `:prefix:table_blog_tags`
 WHERE `id` IN (
-	SELECT DISTINCT `tag_id` FROM `:prefix:table_blog_entries_tags` 
-	WHERE `tag_id` IN (SELECT DISTINCT `tag_id` FROM `:prefix:table_blog_entries_tags` WHERE `blog_id` = :id) 
-	GROUP BY 1 
+	SELECT DISTINCT `tag_id` FROM `:prefix:table_blog_entries_tags`
+	WHERE `tag_id` IN (SELECT DISTINCT `tag_id` FROM `:prefix:table_blog_entries_tags` WHERE `blog_id` = :id)
+	GROUP BY 1
 	HAVING COUNT(*) = 1)
 SQL;
         $sql = iaDb::printf($sql, [

@@ -30,6 +30,7 @@
 {else}
     {if $blog_entries}
         <div class="ia-items blogroll">
+    <h1>modules /blog /templates /front /index.tpl</h1>
             {foreach $blog_entries as $blog_entry}
                 <div class="ia-item">
                     {if $blog_entry.image}

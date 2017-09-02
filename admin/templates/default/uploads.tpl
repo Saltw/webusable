@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /uploads.tpl</h1>
+
 {if isset($smarty.get.mode)}
     <!DOCTYPE html>
     <html>

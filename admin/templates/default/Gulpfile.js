@@ -13,6 +13,7 @@ var pjson      = require('./package.json'),
     rename     = require("gulp-rename"),
     imagemin   = require("gulp-imagemin"),
     less       = require("gulp-less"),
+    sass       = require("gulp-sass"),
     sourcemaps = require('gulp-sourcemaps'),
     cleanCSS   = require('gulp-clean-css');
 
@@ -33,6 +34,14 @@ var config = {
                 "less/base-roseus.less"
             ],
             srcDev: "less/base-default.less",
+            dest: "css"
+        },
+        sass: {
+            path: "sass/**/*.scss",
+            src: [
+                "sass/admin.scss",
+            ],
+            srcDev: "sass/admin.scss",
             dest: "css"
         }
     }
@@ -63,8 +72,8 @@ gulp.task("less", function(){
         .pipe(notify({
             sound: true,
             title: "Build completed!",
-            message: "File: <%= file.relative %>. No errors. Images optimized",
-            icon: path.join(__dirname, "img/ico/apple-touch-icon.png")
+            message: "Archivo compilado: <%= file.relative %>. Sin errores. Imagenes optimizadas",
+            icon: path.join(__dirname, "img/ios/apple-touch-icon.png")
         }));
 });
 
@@ -84,18 +93,59 @@ gulp.task("less-dev", function(){
             sound: true,
             title: "Compilation done! =)",
             message: "File: <%= file.relative %>. No errors.",
-            icon: path.join(__dirname, "img/ico/apple-touch-icon.png")
+            icon: path.join(__dirname, "img/ios/apple-touch-icon.png")
         }));
 });
 
-gulp.task("build", ["less", "images"]);
+gulp.task("sass", function(){
+    return gulp.src(config.paths.sass.src)
+        // .pipe(sass().on('error', function(err) {
+        //     gutil.log(err);
+        //     this.emit('end');
+        // }))
+        .pipe(sass({sourceComments: true}).on('error', function(err) {
+            gutil.log(err);
+            this.emit('end');
+        }))
+        // .pipe(cleanCSS({
+        //     advanced: false
+        // }))
+        .pipe(gulp.dest(config.paths.sass.dest))
+        .pipe(notify({
+            sound: true,
+            title: "Build completed!",
+            message: "Archivo compilado: <%= file.relative %>. Sin errores. Imagenes optimizadas",
+            icon: path.join(__dirname, "img/ios/apple-touch-icon.png")
+        }));
+});
+
+gulp.task("sass-dev", function(){
+    return gulp.src(config.paths.sass.srcDev)
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', function(err) {
+            gutil.log(err);
+            this.emit('end');
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(config.paths.sass.dest))
+        .pipe(notify({
+            sound: true,
+            title: "Compilation SASS done! =)",
+            message: "File: <%= file.relative %>. No errors.",
+            icon: path.join(__dirname, "img/ios/apple-touch-icon.png")
+        }));
+});
+
+gulp.task("build", ["less", "sass", "images"]);
 
 gulp.task("watch", function(){
     gulp.watch(config.paths.less.path, ["less"]);
+    gulp.watch(config.paths.sass.path, ["sass"]);
 });
 
 gulp.task("watch-dev", function(){
     gulp.watch(config.paths.less.path, ["less-dev"]);
+    gulp.watch(config.paths.sass.path, ["sass-dev"]);
 });
 
 gulp.task("default", function() {

@@ -20,6 +20,7 @@
             </a>
         </div>
 
+        <!-- Nav search -->
         <div class="collapse navbar-collapse" id="navbar-collapse">
             {if $core.config.search_navbar}
                 <form method="get" action="{$smarty.const.IA_URL}search/" class="search-navbar pull-right">

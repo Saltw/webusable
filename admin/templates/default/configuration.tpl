@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /configuration.tpl</h1>
+
 {if isset($params)}
 <form enctype="multipart/form-data" method="post" class="sap-form form-horizontal">
     {preventCsrf}
@@ -60,11 +62,7 @@
                         </label>
                     </div>
 
-                    {if 'textarea' == $entry.type}
-                        <div class="col col-lg-8">
-                    {else}
                         <div class="col col-lg-5">
-                    {/if}
 
                     <input type="hidden" class="chck" name="c[{$entry.name}]" value="{if 'custom' != $entry.class}1{else}0{/if}" />
                     {if 'password' == $entry.type}
@@ -75,7 +73,9 @@
                         <div class="item-input">
                             <input type="password" class="js-input-password" name="v[{$entry.name}]" id="{$entry.name}" value="{$entry.value|escape}" autocomplete="new-password" />
                         </div>
+                    {* {elseif ('text' == $entry.type) or ('number' == $entry.type)} *}
                     {elseif ('text' == $entry.type) or ('number' == $entry.type) or ('tel' == $entry.type) or ('email' == $entry.type)}
+
                         {if 'captcha_preview' == $entry.name}
                             {captcha preview=true}
                         {else}
@@ -101,7 +101,7 @@
                                         {foreach $core.languages as $iso => $language}
                                             {if $iso != $core.language.iso}
                                                 <div class="translate-group__item">
-                                                    <input type="{$entry.type}" name="v[{$entry.name}][{$iso}]" id="{$entry.name}-{$iso}" value="{$entry.value[$iso]|escape}" {if isset ($tooltips[$entry.name|cat:"_title"])} title='{$tooltips[$entry.name|cat:"_title"]}' {/if} {if isset ($tooltips[$entry.name|cat:"_placeholder"])} placeholder='{$tooltips[$entry.name|cat:"_placeholder"]}' {/if} {if ($entry.pattern != "")} pattern="{$entry.pattern}" {/if} {if ($entry.maxlength != 0)} maxlength="{$entry.maxlength}" {/if} {if ($entry.required == "1")} required {/if} />
+                                                    <input type="{$entry.type}" name="v[{$entry.name}][{$iso}]" id="{$entry.name}-{$iso}" value="{$entry.value[$iso]|escape}" />
                                                     <span class="translate-group__item__code">{$language.title|escape}</span>
                                                 </div>
                                             {/if}
@@ -134,7 +134,7 @@ $(function() {
                         <div class="translate-group item-input" id="language-group-{$entry.name}">
                             <div class="translate-group__default">
                                 <div class="translate-group__item">
-                                    <textarea name="v[{$entry.name}]{if $isMultilingual}[{$core.language.iso}]{/if}" id="{$entry.name}" class="{if $entry.options.wysiwyg == 1}js-wysiwyg {elseif $entry.options.code_editor}js-code-editor {/if}common" cols="45" rows="7">{{($isMultilingual) ? $entry.value[$core.language.iso] : $entry.value}|escape}</textarea>
+                                    <textarea name="v[{$entry.name}]{if $isMultilingual}[{$core.language.iso}]{/if}" id="{$entry.name}" class="{if $entry.options.wysiwyg == 1}js-wysiwyg {elseif $entry.options.code_editor}js-code-editor {/if}common" rows="5">{{($isMultilingual) ? $entry.value[$core.language.iso] : $entry.value}|escape}</textarea>
                                     {if $isMultilingual && count($core.languages) > 1}
                                         <div class="translate-group__item__code">
                                             {$core.language.title|escape}
@@ -147,7 +147,7 @@ $(function() {
                                     {foreach $core.languages as $iso => $language}
                                         {if $iso != $core.language.iso}
                                             <div class="translate-group__item">
-                                                <textarea name="v[{$entry.name}][{$iso}]" id="{$entry.name}-{$iso}" class="{if $entry.options.wysiwyg == 1}js-wysiwyg {elseif $entry.options.code_editor}js-code-editor {/if}common" cols="45" rows="7">{$entry.value[$iso]|escape}</textarea>
+                                                <textarea name="v[{$entry.name}][{$iso}]" id="{$entry.name}-{$iso}" class="{if $entry.options.wysiwyg == 1}js-wysiwyg {elseif $entry.options.code_editor}js-code-editor {/if}common" rows="5">{$entry.value[$iso]|escape}</textarea>
                                                 <span class="translate-group__item__code">{$language.title|escape}</span>
                                             </div>
                                         {/if}
@@ -187,7 +187,7 @@ $(function() {
                         {/if}
 
                         <div class="item-input">
-                            {html_radio_switcher value=$entry.value name=$entry.name conf=true titleOn=$tooltips[$entry.name|cat:"_title_on"] titleOff=$tooltips[$entry.name|cat:"_title_off"]}
+                            {html_radio_switcher value=$entry.value name=$entry.name conf=true titleOn=$tooltips[$entry.name|cat:"_tittle_on"] titleOff=$tooltips[$entry.name|cat:"_title_off"]}
                         </div>
                     {elseif 'select' == $entry.type}
                         {if $custom}

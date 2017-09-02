@@ -54,10 +54,10 @@ class iaSanitize extends abstractUtil
     }
 
     /**
-     * Converts special characters to HTML entities
+     * Convierte caracteres especiales en entidades HTML
      *
-     * @param string $string text to be converted
-     * @param int $mode mode
+     * @param string $string texto a convertir
+     * @param int $mode modo
      *
      * @return array|string
      */
@@ -156,7 +156,7 @@ class iaSanitize extends abstractUtil
         $string = $urlEncoded ? $string : preg_replace('#[^a-z0-9_]+#i', $separator, $string);
         $string = trim($string, $separator);
 
-        return $string;
+        return strtolower($string);
     }
 
     public static function alias($string, $separator = '-')

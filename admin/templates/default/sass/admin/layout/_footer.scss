@@ -1,0 +1,14 @@
+
+ul.redes {
+    padding: 0;
+    $map:(
+        bg: $color-footer,
+        color: $color-b,
+        opacity: 0.9);
+    @include sociales($map...);
+
+    & li a:before {
+        top: 0;
+        margin: 0;
+    }
+}

@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /login.tpl</h1>
+
 <!DOCTYPE html>
 <html lang="{$core.language.iso}" dir="{$core.language.direction}">
     <head>

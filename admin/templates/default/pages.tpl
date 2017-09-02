@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /pages.tpl</h1>
+º
 <form method="post" id="page_form" class="sap-form form-horizontal">
     {preventCsrf}
     <input type="hidden" name="language" id="js-active-language" />
@@ -302,7 +304,7 @@
                         <div class="translate-group" id="language-group-meta_og_title">
                             <div class="translate-group__default">
                                 <div class="translate-group__item">
-                                    <input type="text" name="meta_og_title[{$core.language.iso}]"{if isset($metaOgTitle[$core.language.iso])} value="{$metaOgTitle[$core.language.iso]|escape}" {else} value="{$title[$core.language.iso]|escape}" {/if} />
+                                    <input type="text" name="meta_og_title[{$core.language.iso}]"{if isset($metaOgTitle[$core.language.iso])} value="{$metaOgTitle[$core.language.iso]|escape}" {/if} />
                                     <div class="translate-group__item__code">{$core.language.title|escape}</div>
                                 </div>
                             </div>
@@ -310,7 +312,7 @@
                                 {foreach $core.languages as $iso => $language}
                                     {if $iso != $core.language.iso}
                                         <div class="translate-group__item">
-                                            <input type="text" name="meta_og_title[{$iso}]"{if isset($metaOgTitle.$iso)} value="{$metaOgTitle.$iso|escape}" {else} value="{$title.$iso|escape}" {/if} />
+                                            <input type="text" name="meta_og_title[{$iso}]"{if isset($metaOgTitle.$iso)} value="{$metaOgTitle.$iso|escape}" {/if} />
                                             <span class="translate-group__item__code">{$language.title|escape}</span>
                                         </div>
                                     {/if}
@@ -318,7 +320,7 @@
                             </div>
                         </div>
                     {else}
-                        <input type="text" name="meta_og_title[{$core.language.iso}]"{if isset($metaOgTitle[$core.language.iso])} value="{$metaOgTitle[$core.language.iso]|escape}"{else}value="{$title.$iso|escape}"{/if} />
+                        <input type="text" name="meta_og_title[{$core.language.iso}]"{if isset($metaOgTitle[$core.language.iso])} value="{$metaOgTitle[$core.language.iso]|escape}" {/if} />
                     {/if}
                     <p class="help-block">{lang key='title_og_help_block'}</p>
                 </div>
@@ -330,6 +332,11 @@
                 </div>
                 <div class="col col-lg-4">
                     <select name="meta_og_type[{$core.language.iso}]">
+                    {if isset($metaOgType[$core.language.iso]) && !empty($metaOgType[$core.language.iso])}
+                        <option value="{$metaOgType[$core.language.iso]}">{$metaOgType[$core.language.iso]}</option>
+                    {else}
+                        <option value="article">article</option>
+                    {/if}
                         {include 'social-meta-types.tpl'}
                     </select>
                 </div>

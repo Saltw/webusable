@@ -1,43 +1,19 @@
 <?php
-/******************************************************************************
- *
- * Subrion - open source content management system
- * Copyright (C) 2017 Intelliants, LLC <https://intelliants.com>
- *
- * This file is part of Subrion.
- *
- * Subrion is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Subrion is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Subrion. If not, see <http://www.gnu.org/licenses/>.
- *
- *
- * @link https://subrion.org/
- *
- ******************************************************************************/
 
 class iaSitemap extends abstractCore
 {
     const FILENAME = 'sitemap.xml';
 
     const GETTER_METHOD_NAME = 'getSitemapEntries';
-    
+
     const LINKS_SET_CORE = 1;
     const LINKS_SET_PACKAGES = 2;
     const LINKS_SET_PLUGINS = 3;
 
     protected $_xmlWrapper = '<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
- xmlns:xhtml="http://www.w3.org/1999/xhtml">:content:</urlset>
- ';
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        :content:
+    </urlset>';
 
     protected $_xmlEntry = '<url><loc>:url</loc>:langs</url>';
     protected $_xmlLangEntry = '<xhtml:link rel="alternate" hreflang=":lang" href=":url" />';
@@ -109,7 +85,7 @@ class iaSitemap extends abstractCore
         $iaItem = $this->iaCore->factory('item');
 
         $result = [];
-        
+
         switch ($setType) {
             case self::LINKS_SET_CORE:
                 $modulesList = $this->iaDb->keyvalue(['name', 'type'], iaDb::convertIds(iaCore::STATUS_ACTIVE, 'status'), $iaItem::getModulesTable());

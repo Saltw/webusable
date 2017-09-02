@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /statistics.tpl</h1>
+
 {ia_hooker name='smartyAdminStatisticsPage' package=$package}
 <div class="row">
     <div class="col col-lg-6">

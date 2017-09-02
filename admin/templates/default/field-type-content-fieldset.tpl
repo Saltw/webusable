@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /field-type-content-fieldset.tpl</h1>
+
 <div class="wrap-list">
     {foreach $item_sections as $key => $section}
         {if !empty($section.fields) && isset($section.name)}

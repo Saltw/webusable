@@ -2,13 +2,17 @@
 <html lang="{$core.language.iso}" dir="{$core.language.direction}">
 <head>
     <!-- COMMON TAGS -->
+    <title>{ia_print_title}</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Search Engine -->
-    <title>{ia_print_title}</title>
+{if isset($core.page['meta-description']) && !empty($core.page['meta-description'])}
     <meta name="description" content="{$core.page['meta-description']}" />
-{if $core.page['meta-keywords'] != ""}
+{else}
+    <meta name="description" content="{$core.config.default_description}" />
+{/if}
+{if isset($core.page['meta-keywords']) && !empty($core.page['meta-keywords'])}
     <meta name="keywords" content="{$core.page['meta-keywords']}" />
 {/if}
     <meta name="robots" content="index" />
@@ -192,6 +196,8 @@
                         {include '_layout/menu-social.tpl'}
                     </ul>
                 {/if}
+
+                {include '_layout/mapa-web.tpl'}
 
                 {ia_blocks block='copyright'}
 

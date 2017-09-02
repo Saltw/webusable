@@ -1,3 +1,5 @@
+<h1>/admin /templates /default /field-type-content-manage.tpl</h1>
+
 {$type = $field.type}
 {$fieldName = $field.name}
 {$name = "field_{$field.item}_{$field.name}"}
