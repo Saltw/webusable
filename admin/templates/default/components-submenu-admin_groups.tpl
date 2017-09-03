@@ -2,7 +2,7 @@
 <!-- admin/templates/default/layout.tpl: -->
 {foreach $core.page.info.menu as $item}
     {if !empty($item.items)}
-    <ul id="nav-sub-{$item.name}" class="nav-sub{if $core.page.info.group == $item.id} active{/if}" style="background: violet">
+    <ul id="nav-sub-{$item.name}" class="nav-sub{if $core.page.info.group == $item.id} active{/if}" style="background: pink">
         {foreach $item.items as $submenu}
             {if $submenu.name}
             <li class="{if $core.page.info.name == $submenu.name || $core.page.info.parent == $submenu.name

@@ -39,32 +39,38 @@
     <body id="page--{$core.page.name}" class="ss-{$core.config.sap_style}">
         <div class="overall-wrapper">
             <div class="panels-wrapper">
-                <div class="m-header">
-                    <a class="m-header__brand" href="{$smarty.const.IA_ADMIN_URL}">
-                        <img src="{$img}logo.png" alt="WebUsable CMS &middot; {$core.config.version}" title="{lang key='dashboard'}">
-                    </a>
-                    <a href="#" class="m-header__toggle"><span class="fa fa-bars"></span></a>
-                </div>
-                <section id="panel-left" style="background: blue">
-                    <a class="brand" href="{$smarty.const.IA_ADMIN_URL}">
-                        <img src="{$img}logo.png" alt="WebUsable CMS &middot; {$core.config.version}" title="{lang key='dashboard'}">
-                    </a>
-                    <ul class="nav-main" style="background: lime">
-                        <li{if 0 == $core.page.info.group} class="current active"{/if}>
-                            <a href="{$smarty.const.IA_ADMIN_URL}" class="dashboard" data-toggle="nav-sub-dashboard"><i class="i-gauge"></i>{lang key='dashboard'}</a>
-                        </li>
-                        {foreach $core.page.info.menu as $entry}
-                            <li{if $core.page.info.group == $entry.id} class="current active"{/if} id="menu-section-{$entry.name}">
-                                <a href="#"{if !empty($entry.items)} data-toggle="nav-sub-{$entry.name}"{/if}><i class="i-cogs i-{$entry.name}"></i>{$entry.title}</a>
-                            </li>
-                        {/foreach}
-                    </ul>
-                    <div class="system-info">
-                        WebUsable CMS
-                        <br>
-                        <span class="version">v {$core.config.version}</span>
+                <header>
+                    <h1 class="pechado">WebUsable | {lang key='dashboard'}</h1>
+                    <div class="m-header">
+                        <a class="m-header__brand" href="{$smarty.const.IA_ADMIN_URL}">
+                            <img src="{$img}logo.png" alt="WebUsable CMS &middot; {$core.config.version}" >
+                        </a>
+                        <a href="#" class="m-header__toggle" title="{lang key='dropdown'}"><span class="fa fa-bars"></span></a>
                     </div>
-                    <nav class="">
+                    <nav id="panel-left" style="background: blue">
+                        <h2 class="pechado">{lang key='page_title_menus'}</h2>
+                        <li>
+                            <a class="brand" href="{$smarty.const.IA_ADMIN_URL}">
+                                <img src="{$img}logo.png" alt="WebUsable CMS &middot; {$core.config.version}" >
+                            </a>
+                        </li>
+
+                        <!-- table_admin_pages_groups -->
+                        <ul class="nav-main" style="background: lime">
+                            <li{if 0 == $core.page.info.group} class="current active"{/if}>
+                                <a href="{$smarty.const.IA_ADMIN_URL}" class="dashboard" data-toggle="nav-sub-dashboard"><i class="i-gauge" title="{lang key='dashboard'}"></i>{lang key='dashboard'}</a>
+                            </li>
+                            {foreach $core.page.info.menu as $entry}
+                                <li{if $core.page.info.group == $entry.id} class="current active"{/if} id="menu-section-{$entry.name}">
+                                    <a href="#"{if !empty($entry.items)} data-toggle="nav-sub-{$entry.name}"{/if}><i class="i-cogs i-{$entry.name}"></i>{$entry.title}</a>
+                                </li>
+                            {/foreach}
+                        </ul>
+                        <li class="system-info">
+                            WebUsable CMS
+                            <span class="version">v {$core.config.version}</span>
+                        </li>
+                        {* <nav class=""> *}
                         <ul class="main-centro redes sociales">
                             <li>
                                 <a href="https://twitter.com/WebUsableTeam" target="_blank" class="icon-twitter abcentro"></a>
@@ -76,31 +82,33 @@
                                 <a href="https://github.com/Saltw/webusable" target="_blank" class="icon-github abcentro"></a>
                             </li>
                         </ul>
+                        {* </nav> *}
                     </nav>
-                </section>
 
-                <section id="panel-center" class="{if isset($smarty.cookies.panelHidden) && '1' == $smarty.cookies.panelHidden}is-hidden{/if}">
-                    {if isset($dashboard)}
-                        <ul id="nav-sub-dashboard" class="nav-sub{if 0 == $core.page.info.group} active{/if}">
-                            <li class="single">
-                                <ul class="list-unstyled quick-links clearfix">
-                                    {foreach $dashboard as $item}
-                                        <li><a href="{$item.url}"><span class="link-icon"><i class="i-{$item.icon}"></i></span>{lang key=$item.name default=$item.text}</a></li>
-                                    {/foreach}
-                                    <li class="link-add">
-                                        <a href="#" id="js-cmd-add-quicklink">
-                                            <span class="link-icon"><i class="i-plus"></i></span>{lang key='add_quick_link'}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    {/if}
-                    {include 'menu.tpl'}
-                </section>
+                    <nav id="panel-center" class="{if isset($smarty.cookies.panelHidden) && '1' == $smarty.cookies.panelHidden}is-hidden{/if}">
+                        <h3>{lang key='submenus'}</h3>
+                        {if isset($dashboard)}
+                            <ul id="nav-sub-dashboard" class="nav-sub{if 0 == $core.page.info.group} active{/if}" style="background: tomato">
+                                <li class="single">
+                                    <ul class="list-unstyled quick-links clearfix">
+                                        {foreach $dashboard as $item}
+                                            <li><a href="{$item.url}"><span class="link-icon"><i class="i-{$item.icon}"></i></span>{lang key=$item.name default=$item.text}</a></li>
+                                        {/foreach}
+                                        <li class="link-add">
+                                            <a href="#" id="js-cmd-add-quicklink">
+                                                <span class="link-icon"><i class="i-plus"></i></span>{lang key='add_quick_link'}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        {/if}
+                        {include 'menu.tpl'}
+                    </nav>
+                </header>
 
                 <section id="panel-content">
-                    <div class="navbar">
+                    <nav class="navbar">
                         <ul class="nav navbar-nav navbar-right" style="background: tomato">
                             <li>
                                 <a href="{$smarty.const.IA_URL}" title="{lang key='site_home'}" target="_blank"><i class="fa fa-desktop"></i><span> {lang key='site_home'}</span></a>
@@ -188,7 +196,7 @@
                                 <a href="#"><i class="fa{if isset($smarty.cookies.panelHidden) && '1' == $smarty.cookies.panelHidden} fa-angle-right{else} fa-angle-left{/if}"></i></a>
                             </li>
                         </ul>
-                    </div>
+                    </nav>
 
                     <div class="page">
                         <div class="page__heading">
