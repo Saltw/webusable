@@ -1,5 +1,5 @@
 <?php
-# /admin /templates /default /pages.tpl 
+# /admin /templates /default /pages.tpl
 
 class iaBackendController extends iaAbstractControllerBackend
 {
@@ -287,6 +287,9 @@ class iaBackendController extends iaAbstractControllerBackend
 
         $parentPage = $this->getHelper()->getByName($entryData['parent'], false);
         $groups = $this->getHelper()->getGroups([$this->_iaCore->get('home_page'), $entryData['name']]);
+
+        $pagesGroups = $this->getHelper()->getPagesGroups([$this->_iaCore->get('home_page'), $entryData['name']]);
+
         $isHomepage = ($this->_iaCore->get('home_page', iaView::DEFAULT_HOMEPAGE) == $entryData['name']);
         $homePageTitle = $this->_iaDb->one_bind('value', '`key` = :key AND `category` = :category',
             ['key' => 'page_title_' . $this->_iaCore->get('home_page'), 'category' => iaLanguage::CATEGORY_PAGE], iaLanguage::getTable());
@@ -306,6 +309,7 @@ class iaBackendController extends iaAbstractControllerBackend
         $iaView->assign('menus', $this->_getMenus());
         $iaView->assign('pages', $this->getHelper()->getNonServicePages(['index']));
         $iaView->assign('pagesGroup', $groups);
+        $iaView->assign('pagGroups', $pagesGroups);
         $iaView->assign('parentPageId', $parentPage['id']);
     }
 

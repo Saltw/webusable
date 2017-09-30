@@ -1,5 +1,5 @@
 <h1>/admin /templates /default /pages.tpl</h1>
-º
+
 <form method="post" id="page_form" class="sap-form form-horizontal">
     {preventCsrf}
     <input type="hidden" name="language" id="js-active-language" />
@@ -22,16 +22,31 @@
                     <label class="col col-lg-2 control-label">{lang key='parent'}</label>
 
                     <div class="col col-lg-4">
-                        <select name="parent_id" id="input-parent">
-                            <option value="0">{lang key='_no_parent_page_'}</option>
-                            {foreach $pagesGroup as $pageGroup}
-                                <optgroup label="{$pageGroup.title}">
-                                    {foreach $pageGroup.children as $pageId => $pageTitle}
-                                        <option value="{$pageId}"{if $parentPageId == $pageId} selected{/if}>{$pageTitle|escape}</option>
-                                    {/foreach}
-                                </optgroup>
-                            {/foreach}
-                        </select>
+                    <select name="parent_id" id="input-parent">
+                        <option value="0">{lang key='_no_parent_page_'}</option>
+                        {foreach $pagGroups as $pageGroup}
+                            <optgroup label="{$pageGroup.title}">
+                                {foreach $pageGroup.children as $pageId => $page}
+                                    {if isset($page.children)}
+                                        <option value="{$pageId}"{if $parentPageId == $pageId} selected{/if} style="font-weight:bold;">{$page.title|escape}</option>
+                                        //ok
+                                        {foreach $page.children as $page_2Id => $page_2}
+                                            {if isset($page_2.children)}
+                                                <option value="{$page_2Id}"{if $parentPageId == $page_2Id} selected{/if} style="font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;{$page_2.title|escape}</option>
+                                                {foreach $page_2.children as $page_3Id => $page_3}
+                                                    <option value="{$page_3Id}"{if $parentPageId == $page_3Id} selected{/if}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$page_3.title|escape}</option>
+                                                {/foreach}
+                                            {else}
+                                                <option value="{$page_2Id}"{if $parentPageId == $page_2Id} selected{/if}>&nbsp;&nbsp;&nbsp;&nbsp;{$page_2.title|escape}</option>
+                                            {/if}
+                                        {/foreach}
+                                    {else}
+                                        <option value="{$pageId}"{if $parentPageId == $pageId} selected{/if}>{$page.title|escape}</option>
+                                    {/if}
+                                {/foreach}
+                            </optgroup>
+                        {/foreach}
+                    </select>
                     </div>
                 </div>
 
