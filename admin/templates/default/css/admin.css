@@ -17668,6 +17668,10 @@ dl-buttons-dos {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%); }
 
+/* line 1, sass/admin/layout/_header.scss */
+#panel-content {
+  width: 100%; }
+
 /* line 2, sass/admin/layout/_footer.scss */
 ul.redes {
   padding: 0; }
